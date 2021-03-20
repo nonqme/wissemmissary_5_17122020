@@ -2,55 +2,35 @@ const teddiesPromise = fetch("http://localhost:3000/api/teddies");
 teddiesPromise
     .then(response => response.json())
     .then(response => {
-        let affichageTeddies = "<ul class=container_grid>";  
+        let affichageTeddies = "<ul class=maincontainer_grid>";  
         let i=0;  
         for(let teddies of response){
             console.log(teddies)
             i=i+1;
-            let creationdivTeddies=`<li class=container_grid_bloc>
-                                        <div class=container_grid_bloc_imgdiv>
-                                            <img class="container_grid_bloc_imgdiv_img container_grid_bloc_imgdiv_img-style${i}" src=${teddies.imageUrl}></img>
-                                        </div>
-                                        <div class=container_grid_bloc_nameprice>
-                                            <div class=container_grid_bloc_nameprice_name>
-                                                <h1 class=container_grid_bloc_nameprice_name_title>${teddies.name}</h1>
-                                            </div>
-                                            <div class=container_grid_bloc_nameprice_desc>
-                                                <p class=container_grid_bloc_nameprice_desc_txt>${teddies.description}</p>
-                                            </div>
-                                            <div class=container_grid_bloc_nameprice_price>
-                                                <p class=container_grid_bloc_nameprice_price_txt>${teddies.price}€</p>
-                                            </div>
-                                            <div class="container_grid_bloc_nameprice_info" >
-                                                <i class="fas fa-chevron-up container_grid_bloc_nameprice_info_iconup"></i>
-                                                <i class="fas fa-chevron-down container_grid_bloc_nameprice_info_icondown"></i>
-                                                <div class="container_grid_bloc_nameprice_info_linkbloc">
-                                                    <a href="" class="container_grid_bloc_nameprice_info_linkbloc_link">Plus d'info</a>
+            let creationdivTeddies=`<li class=maincontainer_grid_bloc>
+                                        <a href="" class=maincontainer_grid_bloc_link>
+                                            <article class=maincontainer_grid_bloc_link_article>
+                                                <div class=maincontainer_grid_bloc_link_article_imgdiv>
+                                                    <img class="maincontainer_grid_bloc_link_article_imgdiv_img maincontainer_grid_bloc_link_article_imgdiv_img-style${i}" src=${teddies.imageUrl} alt="Photo d'un ours en peluche prénommé ${teddies.name} en vente sur Orinoco pour ${teddies.price}€."></img>
                                                 </div>
-                                            </div>   
+                                                <div class=maincontainer_grid_bloc_link_article_nameprice>
+                                                    <div class=maincontainer_grid_bloc_link_article_nameprice_name>
+                                                        <h1 class=maincontainer_grid_bloc_link_article_nameprice_name_title>${teddies.name}</h1>
+                                                    </div>
+                                                    <div class=maincontainer_grid_bloc_link_article_nameprice_desc>
+                                                        <p class=maincontainer_grid_bloc_link_article_nameprice_desc_txt>${teddies.description}</p>
+                                                    </div>
+                                                    <div class=maincontainer_grid_bloc_link_article_nameprice_price>
+                                                        <p class=maincontainer_grid_bloc_link_article_nameprice_price_txt>${teddies.price}€</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </a>   
                                     </li>`;
             affichageTeddies += creationdivTeddies;
         }
         affichageTeddies += "</ul>";
-        document.getElementById("container").innerHTML = affichageTeddies;
-        return response;
-
-    })
-    .then(response => {
-        let iconList = document.querySelectorAll(".container_grid_bloc_nameprice_info_iconup");
-        for (var i = 0; i < iconList.length; i++) {
-            iconList[i].addEventListener("click", function() {
-                let test = this.parentNode;
-                test.classList.add("container_grid_bloc_nameprice_info-openstyle");
-            });
-          }
-        let iconLists = document.querySelectorAll(".container_grid_bloc_nameprice_info_icondown");
-        for (var i = 0; i < iconLists.length; i++) {
-              iconLists[i].addEventListener("click", function() {
-                  let test = this.parentNode;
-                  test.classList.remove("container_grid_bloc_nameprice_info-openstyle");
-              });
-            }  
+        document.getElementById("maincontainer").innerHTML = affichageTeddies;
     })
     .catch((error) => {
         console.log(error);        

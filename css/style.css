@@ -1,162 +1,70 @@
-@keyframes zoom {
-  from {
-    transform: scale(1, 1);
-  }
-  to {
-    transform: scale(1.03, 1.03);
-  }
-}
-@keyframes buttoneffect {
-  to {
-    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-5px);
-    color: white;
-    background-color: #E78C02;
-  }
-}
-@keyframes plusdinfo {
-  to {
-    margin: 0;
-  }
-}
-@keyframes moinsdinfo {
-  to {
-    margin: 9.5rem 0 0 0;
-  }
-}
-.container_grid {
+.maincontainer_grid {
   display: grid;
   row-gap: 1rem;
   margin: 0;
   padding: 0;
+}
+.maincontainer_grid_bloc {
   list-style: none;
 }
-.container_grid_bloc {
-  margin: 0;
-  padding: 0;
+.maincontainer_grid_bloc_link {
+  text-decoration: none;
+}
+.maincontainer_grid_bloc_link_article {
+  width: 100%;
   display: flex;
-  align-items: center;
   box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  border-radius: 5px;
-  position: relative;
+  border-radius: 10px;
 }
-.container_grid_bloc_imgdiv {
-  box-sizing: border-box;
-}
-.container_grid_bloc_imgdiv_img {
+.maincontainer_grid_bloc_link_article_imgdiv_img {
   display: block;
   width: 150px;
   height: 150px;
   object-fit: cover;
 }
-.container_grid_bloc_imgdiv_img-style3 {
+.maincontainer_grid_bloc_link_article_imgdiv_img-style3 {
   object-position: left;
 }
-.container_grid_bloc_imgdiv_img-style5 {
+.maincontainer_grid_bloc_link_article_imgdiv_img-style5 {
   object-position: left;
 }
-.container_grid_bloc_nameprice {
+.maincontainer_grid_bloc_link_article_nameprice {
   width: 100%;
-  object-fit: cover;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
-.container_grid_bloc_nameprice_name {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.container_grid_bloc_nameprice_name_title {
+.maincontainer_grid_bloc_link_article_nameprice_name_title {
+  margin: 0.5rem;
   font-family: "Bubblegum Sans", cursive;
-  text-align: center;
   font-weight: 400;
   font-size: 1.4rem;
   margin: 0.5rem;
   color: #1D72B3;
 }
-.container_grid_bloc_nameprice_desc_txt {
+.maincontainer_grid_bloc_link_article_nameprice_desc_txt {
   width: 150px;
+  margin: 0 0 0 0.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  color: black;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 0 0 0.5rem;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  text-align: center;
-  font-size: 0.9rem;
 }
-.container_grid_bloc_nameprice_price {
+.maincontainer_grid_bloc_link_article_nameprice_price {
   height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
 }
-.container_grid_bloc_nameprice_price_txt {
-  font-family: "Roboto", sans-serif;
+.maincontainer_grid_bloc_link_article_nameprice_price_txt {
   text-align: center;
-  color: #E78C02;
   margin: 0.5rem;
+  color: #E78C02;
   font-size: 1.2rem;
   font-weight: 700;
-}
-.container_grid_bloc_nameprice_info {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(29, 114, 179, 0.8);
-  margin: 9rem 0 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  right: 0px;
-}
-.container_grid_bloc_nameprice_info-openstyle {
-  animation: 0.3s plusdinfo forwards;
-}
-.container_grid_bloc_nameprice_info-closetyle {
-  animation: 0.3s moinsdinfo forwards;
-}
-.container_grid_bloc_nameprice_info_iconup {
-  cursor: pointer;
-  color: #1D72B3;
-  position: absolute;
-  top: -20px;
-  display: block !important;
-}
-.container_grid_bloc_nameprice_info_iconup-effect {
-  display: none !important;
-}
-.container_grid_bloc_nameprice_info_icondown {
-  cursor: pointer;
-  color: #E78C02;
-  position: absolute;
-  top: 3px;
-}
-.container_grid_bloc_nameprice_info_linkbloc {
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  border-radius: 1rem;
-  width: 100px;
-  height: 35px;
-  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
-  background-color: #E78C02;
-}
-.container_grid_bloc_nameprice_info_linkbloc_link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 35px;
-  font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  text-decoration: none;
-  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */

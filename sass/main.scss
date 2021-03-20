@@ -5,166 +5,99 @@ $secondary-color-rgba:rgba(231, 140, 2, 0.8);
 $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
 $text-font: 'Roboto', sans-serif;
 $title-font: 'Bubblegum Sans', cursive;
-@keyframes zoom {
-    from {
-        transform: scale(1,1);
-    }
-    to {
-        transform: scale(1.03,1.03);
-    }
-}
-@keyframes buttoneffect {
-    to{
-        box-shadow: 0px 15px 20px rgba(0,0,0, 0.4);
-        transform: translateY(-5px);
-        color: white;
-        background-color: $secondary-color-hex;  
-    }
-}
-@keyframes plusdinfo {
-    to{
-        margin: 0;
-    }
-}
-@keyframes moinsdinfo {
-    to{
-        margin: 9.5rem 0 0 0;
-    }
+$margin: 0.5rem;
+
+@mixin marginandpadding0 {
+    margin: 0;
+    padding: 0;    
 }
 
-.container_grid {
+@mixin title {
+    font-family: $title-font;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin: $margin;
+    color: $primary-color-hex;
+}
+
+@mixin para {
+    font-family: $text-font;
+    font-size: 0.9rem;
+    color: black;
+}
+
+@mixin price {
+    color: $secondary-color-hex;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: $text-font;
+}
+
+@mixin ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.maincontainer_grid {
     display: grid;
     row-gap: 1rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    @include marginandpadding0();
     &_bloc {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        box-shadow: $bloc-shadow;
-        overflow:hidden;
-        border-radius: 5px; 
-        position: relative;         
-        &_imgdiv {
-            box-sizing: border-box;
-            &_img {
-                display: block;
-                width: 150px;
-                height: 150px;
-                object-fit: cover;
-                &-style3 {
-                    object-position: left;
-                }
-                &-style5 {
-                    object-position: left;
-                }
-            }
-        }
-        &_nameprice{
-            width: 100%;
-            object-fit: cover;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            &_name {
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                &_title{
-                    font-family: $title-font;
-                    text-align: center;
-                    font-weight: 400;
-                    font-size: 1.4rem;
-                    margin: 0.5rem;
-                    color: $primary-color-hex;
-                }
-            }
-            &_desc {
-                &_txt {
-                    width: 150px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    margin: 0 0 0 0.5rem;
-                    font-family: $text-font;
-                    font-weight: 400;
-                    text-align: center;
-                    font-size: 0.9rem;
-                }
-            }
-            &_price {
-                height: 100%;
-                display: flex;
-                align-items: flex-end;
-                justify-content: flex-end;
-                &_txt {
-                    font-family: $text-font;
-                    text-align: center;
-                    color: $secondary-color-hex;
-                    margin: 0.5rem;
-                    font-size: 1.2rem;
-                    font-weight: 700;
-                }
-            }
-            &_info {
+        list-style: none;
+        &_link {
+            text-decoration: none;
+            &_article { 
                 width: 100%;
-                height: 100%;
-                position: absolute;
-                background-color: $primary-color-rgba;
-                margin: 9rem 0 0 0;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                right: 0px;
-                &-openstyle {
-                    animation: 0.3s plusdinfo forwards;
-                }
-                &-closetyle {
-                    animation: 0.3s moinsdinfo forwards;
-                }
-                &_iconup {
-                    cursor: pointer;
-                    color: $primary-color-hex;
-                    position: absolute;
-                    top: -20px;
-                    display: block!important;
-                    &-effect {
-                        display: none!important;
+                box-shadow: $bloc-shadow; 
+                overflow:hidden;
+                border-radius: 10px;     
+                &_imgdiv {
+                    &_img {
+                        display: block;
+                        width: 150px;
+                        height: 150px;
+                        object-fit: cover;
+                        &-style3 {
+                            object-position: left;
+                        }
+                        &-style5 {
+                            object-position: left;
+                        }
                     }
                 }
-                &_icondown {
-                    cursor: pointer;
-                    color: $secondary-color-hex;
-                    position: absolute;
-                    top: 3px;
-                }
-                &_linkbloc {
-                    z-index: 100;
+                &_nameprice{
+                    width: 100%;
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0;
-                    border-radius: 1rem;
-                    width: 100px;
-                    height: 35px;
-                    box-shadow: $bloc-shadow;
-                    background-color: $secondary-color-hex;
-                    &_link {
+                    flex-direction: column;
+                    &_name {
+                        &_title{
+                            margin: $margin;
+                            @include title();
+                        }
+                    }
+                    &_desc {
+                        &_txt {
+                            width: 150px;
+                            margin: 0 0 0 $margin;
+                            @include para();
+                            @include ellipsis();
+                        }
+                    }
+                    &_price {
+                        height: 100%;
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 100px;
-                        height: 35px;
-                        font-size: 1rem;
-                        font-family: $text-font;
-                        text-decoration: none;
-                        color: white;
+                        align-items: flex-end;
+                        justify-content: flex-end;
+                        &_txt {
+                            text-align: center;
+                            margin: $margin;
+                            @include price();
+                        }
                     }   
                 }
-            }    
-        }  
+            }   
+        }      
     }
 }
