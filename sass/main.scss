@@ -3,27 +3,50 @@ $secondary-color-hex: #E78C02;
 $primary-color-rgba:rgba(29, 114, 179, 0.8);
 $secondary-color-rgba:rgba(231, 140, 2, 0.8);
 $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
-@keyframes fade-in {
+$text-font: 'Roboto', sans-serif;
+$title-font: 'Bubblegum Sans', cursive;
+@keyframes zoom {
     from {
-        transform: scale(0.7,0.7);
-    }
-    to {
         transform: scale(1,1);
     }
+    to {
+        transform: scale(1.03,1.03);
+    }
 }
-.fade-in-element {
-    animation: fade-in 0.3s;
-  }
+@keyframes buttoneffect {
+    to{
+        box-shadow: 0px 15px 20px rgba(0,0,0, 0.4);
+        transform: translateY(-5px);
+        color: white;
+        background-color: $secondary-color-hex;  
+    }
+}
+@keyframes plusdinfo {
+    to{
+        margin: 0;
+    }
+}
+@keyframes moinsdinfo {
+    to{
+        margin: 9.5rem 0 0 0;
+    }
+}
 
 .container_grid {
     display: grid;
     row-gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     &_bloc {
         margin: 0;
+        padding: 0;
         display: flex;
         align-items: center;
         box-shadow: $bloc-shadow;
         overflow:hidden;
+        border-radius: 5px; 
+        position: relative;         
         &_imgdiv {
             box-sizing: border-box;
             &_img {
@@ -44,19 +67,18 @@ $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
             object-fit: cover;
             display: flex;
             flex-direction: column;
-            position: relative;
             height: 100%;
             &_name {
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
                 &_title{
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
+                    font-family: $title-font;
                     text-align: center;
-                    font-size: 1.2rem;
+                    font-weight: 400;
+                    font-size: 1.4rem;
                     margin: 0.5rem;
-                    letter-spacing: 1px;
+                    color: $primary-color-hex;
                 }
             }
             &_desc {
@@ -66,12 +88,10 @@ $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
                     overflow: hidden;
                     text-overflow: ellipsis;
                     margin: 0 0 0 0.5rem;
-                    font-family: 'Lato', sans-serif;
+                    font-family: $text-font;
                     font-weight: 400;
                     text-align: center;
                     font-size: 0.9rem;
-                    margin: 0.5rem;
-                    letter-spacing: 1px;
                 }
             }
             &_price {
@@ -80,7 +100,7 @@ $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
                 align-items: flex-end;
                 justify-content: flex-end;
                 &_txt {
-                    font-family: 'Lato', sans-serif;
+                    font-family: $text-font;
                     text-align: center;
                     color: $secondary-color-hex;
                     margin: 0.5rem;
@@ -89,49 +109,62 @@ $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
                 }
             }
             &_info {
-                z-index: 2;
                 width: 100%;
+                height: 100%;
                 position: absolute;
                 background-color: $primary-color-rgba;
-                margin: 0;
-                height: 100%;
-                display: none;
+                margin: 9rem 0 0 0;
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                &_txt {
+                flex-direction: column;
+                right: 0px;
+                &-openstyle {
+                    animation: 0.3s plusdinfo forwards;
+                }
+                &-closetyle {
+                    animation: 0.3s moinsdinfo forwards;
+                }
+                &_iconup {
+                    cursor: pointer;
+                    color: $primary-color-hex;
+                    position: absolute;
+                    top: -20px;
+                    display: block!important;
+                    &-effect {
+                        display: none!important;
+                    }
+                }
+                &_icondown {
+                    cursor: pointer;
+                    color: $secondary-color-hex;
+                    position: absolute;
+                    top: 3px;
+                }
+                &_linkbloc {
+                    z-index: 100;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin: 1rem;
-                    background-color: white;
+                    margin: 0;
                     border-radius: 1rem;
                     width: 100px;
                     height: 35px;
-                    font-size: 1rem;
-                    font-family: 'Roboto', sans-serif;
                     box-shadow: $bloc-shadow;
+                    background-color: $secondary-color-hex;
+                    &_link {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100px;
+                        height: 35px;
+                        font-size: 1rem;
+                        font-family: $text-font;
+                        text-decoration: none;
+                        color: white;
+                    }   
                 }
-            }
-        }
+            }    
+        }  
     }
-    &_bloc:hover .container_grid_bloc_nameprice_info {
-        display: flex;
-    }
-    &_bloc:hover .container_grid_bloc_nameprice_name {
-        display: none;
-    }
-    &_bloc:hover .container_grid_bloc_nameprice_price {
-        display: none;
-    }
-    &_bloc:hover .container_grid_bloc_nameprice_desc {
-        display: none;
-    }
-    
-    &_bloc_nameprice_info_txt:hover {
-        color: white;
-        background-color: $secondary-color-hex;
-        box-shadow: 0px 15px 20px rgba(0,0,0, 0.4);
-        transition:all ease 0.3s;
-        transform: translateY(-5px);
-    } 
 }

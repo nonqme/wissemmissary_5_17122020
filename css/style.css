@@ -1,25 +1,45 @@
-@keyframes fade-in {
+@keyframes zoom {
   from {
-    transform: scale(0.7, 0.7);
-  }
-  to {
     transform: scale(1, 1);
   }
+  to {
+    transform: scale(1.03, 1.03);
+  }
 }
-.fade-in-element {
-  animation: fade-in 0.3s;
+@keyframes buttoneffect {
+  to {
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+    color: white;
+    background-color: #E78C02;
+  }
 }
-
+@keyframes plusdinfo {
+  to {
+    margin: 0;
+  }
+}
+@keyframes moinsdinfo {
+  to {
+    margin: 9.5rem 0 0 0;
+  }
+}
 .container_grid {
   display: grid;
   row-gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .container_grid_bloc {
   margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
   box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  border-radius: 5px;
+  position: relative;
 }
 .container_grid_bloc_imgdiv {
   box-sizing: border-box;
@@ -41,7 +61,6 @@
   object-fit: cover;
   display: flex;
   flex-direction: column;
-  position: relative;
   height: 100%;
 }
 .container_grid_bloc_nameprice_name {
@@ -50,12 +69,12 @@
   justify-content: flex-start;
 }
 .container_grid_bloc_nameprice_name_title {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
+  font-family: "Bubblegum Sans", cursive;
   text-align: center;
-  font-size: 1.2rem;
+  font-weight: 400;
+  font-size: 1.4rem;
   margin: 0.5rem;
-  letter-spacing: 1px;
+  color: #1D72B3;
 }
 .container_grid_bloc_nameprice_desc_txt {
   width: 150px;
@@ -63,12 +82,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 0 0 0.5rem;
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   text-align: center;
   font-size: 0.9rem;
-  margin: 0.5rem;
-  letter-spacing: 1px;
 }
 .container_grid_bloc_nameprice_price {
   height: 100%;
@@ -77,7 +94,7 @@
   justify-content: flex-end;
 }
 .container_grid_bloc_nameprice_price_txt {
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   color: #E78C02;
   margin: 0.5rem;
@@ -85,47 +102,61 @@
   font-weight: 700;
 }
 .container_grid_bloc_nameprice_info {
-  z-index: 2;
   width: 100%;
+  height: 100%;
   position: absolute;
   background-color: rgba(29, 114, 179, 0.8);
-  margin: 0;
-  height: 100%;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.container_grid_bloc_nameprice_info_txt {
+  margin: 9rem 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem;
-  background-color: white;
+  flex-direction: column;
+  right: 0px;
+}
+.container_grid_bloc_nameprice_info-openstyle {
+  animation: 0.3s plusdinfo forwards;
+}
+.container_grid_bloc_nameprice_info-closetyle {
+  animation: 0.3s moinsdinfo forwards;
+}
+.container_grid_bloc_nameprice_info_iconup {
+  cursor: pointer;
+  color: #1D72B3;
+  position: absolute;
+  top: -20px;
+  display: block !important;
+}
+.container_grid_bloc_nameprice_info_iconup-effect {
+  display: none !important;
+}
+.container_grid_bloc_nameprice_info_icondown {
+  cursor: pointer;
+  color: #E78C02;
+  position: absolute;
+  top: 3px;
+}
+.container_grid_bloc_nameprice_info_linkbloc {
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   border-radius: 1rem;
+  width: 100px;
+  height: 35px;
+  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
+  background-color: #E78C02;
+}
+.container_grid_bloc_nameprice_info_linkbloc_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100px;
   height: 35px;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
-}
-.container_grid_bloc:hover .container_grid_bloc_nameprice_info {
-  display: flex;
-}
-.container_grid_bloc:hover .container_grid_bloc_nameprice_name {
-  display: none;
-}
-.container_grid_bloc:hover .container_grid_bloc_nameprice_price {
-  display: none;
-}
-.container_grid_bloc:hover .container_grid_bloc_nameprice_desc {
-  display: none;
-}
-.container_grid_bloc_nameprice_info_txt:hover {
+  text-decoration: none;
   color: white;
-  background-color: #E78C02;
-  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
-  transition: all ease 0.3s;
-  transform: translateY(-5px);
 }
 
 /*# sourceMappingURL=style.css.map */
