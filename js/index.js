@@ -36,6 +36,25 @@ teddiesPromise
         console.log(error);        
     });
 
+const navSlide = () => {
+    const burger = document.querySelector(".headercontainer_mobilemenu_burger");
+    const nav = document.querySelector(".headercontainer_ul");
+    const navLinks = document.querySelectorAll(".headercontainer_ul_list");
+burger.addEventListener("click",() => {
+        nav.classList.toggle("headercontainer_ul-active");
+        navLinks.forEach((link, index) => {
+            if(link.style.animation){
+                link.style.animation ="";
+            } else {
+                link.style.animation = `navFade 0.5s ease forwards ${index / 4 + 0.2}s`;
+            }
+        });
+        burger.classList.toggle("headercontainer_mobilemenu_burger-toggle");
+    });
+
+}
+navSlide();
+
 
 
 

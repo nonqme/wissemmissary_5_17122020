@@ -1,11 +1,22 @@
 $primary-color-hex: #1D72B3;
 $secondary-color-hex: #E78C02;
 $primary-color-rgba:rgba(29, 114, 179, 0.8);
-$secondary-color-rgba:rgba(231, 140, 2, 0.8);
+$secondary-color-rgba:rgba(231, 140, 2, 0.4);
 $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
 $text-font: 'Roboto', sans-serif;
-$title-font: 'Bubblegum Sans', cursive;
+$title-font: 'Nunito', sans-serif;
 $margin: 0.5rem;
+
+@keyframes navFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
 
 @mixin marginandpadding0 {
     margin: 0;
@@ -14,7 +25,8 @@ $margin: 0.5rem;
 
 @mixin title {
     font-family: $title-font;
-    font-weight: 400;
+    font-weight: 700;
+    font-style: italic;
     font-size: 1.4rem;
     margin: $margin;
     color: $primary-color-hex;
@@ -38,7 +50,110 @@ $margin: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+body {
+    @include marginandpadding0();
+}
+a:focus {
+    outline-offset: 4px;
+    outline-color: $primary-color-hex;
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+    box-shadow: $secondary-color-rgba 0px 0px 0px 2px, $secondary-color-rgba 0px 0px 6px -1px, $secondary-color-rgba 0px 0px 0px inset;
+}
+.headercontainer{
+    display: flex;
+    justify-content: space-between;
+    height: 12vh;
+    overflow: hidden;
+    &_logo{
+        display: flex;
+        align-items: center;
+        margin: 1rem;
+        &_img{
+            width: 130px;
+        }
+    }
+    &_ul {
+        position: absolute;
+        right: 0px;
+        height: 88vh;
+        top: 12vh;
+        width: 60%;
+        background-color: $primary-color-hex;
+        margin-left: 100px;
+        box-shadow: rgba(0, 0, 0, 0.15) -2px 2px 3px;
+        @include marginandpadding0();
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+        &-active{
+            transform:translateX(0%);
+        }
+        &_list {
+            list-style: none;
+            margin: 2rem;
+            opacity: 0;
+            &_link{
+                text-decoration: none;
+                font-family: $title-font;
+                font-size: 1.4rem;
+                font-weight: 700;
+                font-style: italic;
+                color: white;
+                white-space: nowrap;
+                text-align: center;
+            }
+        }
+    }
+    &_mobilemenu {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        flex-basis: 28%;
+        margin: 1rem;
+        &_burger{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            &-toggle .headercontainer_mobilemenu_burger_line1 {
+                transform: rotate(-45deg) translate(-5px,5px);
+            }
+            &-toggle .headercontainer_mobilemenu_burger_line2 {
+                opacity: 0;
+            }
+            &-toggle .headercontainer_mobilemenu_burger_line3 {
+                transform: rotate(45deg) translate(-5px,-5px);
+            }
+            &_line{
+                width: 20px;
+                height: 4px;
+                background-color: $primary-color-hex;
+                margin:1.5px;
+                border-radius: 1rem;
+                transition: all 0.2s ease;
+            }
+        }
+        &_basketdiv{
+            margin-top: 1px;
+            &_basket{
+                font-size: 1.3rem;
+                color: $primary-color-hex;
+            }
+        }
+    }
+}
+#maincontainer {
+    margin: 6rem $margin $margin $margin;
+}
 .maincontainer_grid {
     display: grid;
     row-gap: 1rem;
@@ -73,7 +188,6 @@ $margin: 0.5rem;
                     flex-direction: column;
                     &_name {
                         &_title{
-                            margin: $margin;
                             @include title();
                         }
                     }
