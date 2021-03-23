@@ -1,11 +1,13 @@
 $primary-color-hex: #1D72B3;
 $secondary-color-hex: #E78C02;
-$primary-color-rgba:rgba(29, 114, 179, 0.8);
-$secondary-color-rgba:rgba(231, 140, 2, 0.4);
+$header-background-color: white;
+$header-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
 $bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
 $text-font: 'Roboto', sans-serif;
 $title-font: 'Nunito', sans-serif;
-$margin: 0.5rem;
+$marginmain: 0.5rem;
+$burger-transition: all 0.2s ease;
+$mobilemenu-transition: transform 0.2s ease-in;
 
 @keyframes navFade{
     from{
@@ -17,7 +19,16 @@ $margin: 0.5rem;
         transform: translateX(0px);
     }
 }
-
+@mixin flexcolumnaligncenterspaceevenly {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+@mixin flexbetween {
+    display: flex;
+    justify-content: space-between;
+}
 @mixin marginandpadding0 {
     margin: 0;
     padding: 0;    
@@ -27,9 +38,8 @@ $margin: 0.5rem;
     font-family: $title-font;
     font-weight: 700;
     font-style: italic;
-    font-size: 1.4rem;
-    margin: $margin;
-    color: $primary-color-hex;
+    font-size: 1.3rem;
+    margin: $marginmain;
 }
 
 @mixin para {
@@ -50,168 +60,235 @@ $margin: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-body {
+.bodycontainer {
     @include marginandpadding0();
 }
+
 a:focus {
     outline-offset: 4px;
     outline-color: $primary-color-hex;
 }
-header {
+
+
+.header{
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
-    background-color: white;
-    box-shadow: $secondary-color-rgba 0px 0px 0px 2px, $secondary-color-rgba 0px 0px 6px -1px, $secondary-color-rgba 0px 0px 0px inset;
-}
-.headercontainer{
-    display: flex;
-    justify-content: space-between;
-    height: 12vh;
-    overflow: hidden;
-    &_logo{
-        display: flex;
-        align-items: center;
-        margin: 1rem;
-        &_img{
-            width: 130px;
+    background-color: $header-background-color;
+    box-shadow: $header-shadow;
+    z-index: 10;
+    &_container{
+        @include flexbetween();
+        height: 12vh;
+        &_logodiv{
+            display: flex;
+            align-items: center;
+            margin: 1rem;
+            &_img{
+                width: 130px;
+            }
         }
-    }
-    &_ul {
-        position: absolute;
-        right: 0px;
-        height: 88vh;
-        top: 12vh;
-        width: 60%;
-        background-color: $primary-color-hex;
-        margin-left: 100px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-        @include marginandpadding0();
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in;
-        &-active{
-            transform:translateX(0%);
+        &_mobilemenu {
+            @include flexbetween();
+            flex-direction: row-reverse;
+            align-items: center;
+            flex-basis: 28%;
+            margin: 1rem;
+            &_burger{
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                &-toggle .headercontainer_mobilemenu_burger_line1 {
+                    transform: rotate(-45deg) translate(-5px,5px);
+                }
+                &-toggle .headercontainer_mobilemenu_burger_line2 {
+                    opacity: 0;
+                }
+                &-toggle .headercontainer_mobilemenu_burger_line3 {
+                    transform: rotate(45deg) translate(-5px,-5px);
+                }
+                &_line{
+                    width: 20px;
+                    height: 4px;
+                    background-color: $primary-color-hex;
+                    margin:1.5px;
+                    border-radius: 1rem;
+                    transition: $burger-transition;
+                }
+            }
+            &_basketdiv{
+                &_basket{
+                    font-size: 1.3rem;
+                    color: $primary-color-hex;
+                }
+            }
         }
-        &_list {
-            list-style: none;
-            margin: 2rem;
-            opacity: 0;
-            &_link{
-                text-decoration: none;
-                font-family: $title-font;
-                font-size: 1.4rem;
-                font-weight: 700;
-                font-style: italic;
-                color: white;
-                white-space: nowrap;
-                text-align: center;
+        &_ul {
+            position: absolute;
+            right: 0px;
+            height: 88vh;
+            top: 12vh;
+            width: 60%;
+            background-color: $header-background-color;
+            @include marginandpadding0();
+            @include flexcolumnaligncenterspaceevenly();
+            transform: translateX(100%);
+            transition: $mobilemenu-transition;
+            &-active{
+                transform:translateX(0%);
+            }
+            &_list {
+                list-style: none;
+                opacity: 0;
+                &_link{
+                    text-decoration: none;
+                    @include title();
+                    color: $secondary-color-hex;
+                }
+            }
+        }
+        &_mobileeffect{
+            position: absolute;
+            left: 0px;
+            height: 88vh;
+            top: 12vh;
+            width: 40%;
+            background-color:rgba(0,0,0,.7);
+            transform: translateX(-100%);
+            transition: $mobilemenu-transition;
+            &-effect{
+                transform: translateX(0%);
             }
         }
     }
-    &_mobilemenu {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: center;
-        flex-basis: 28%;
-        margin: 1rem;
-        &_burger{
+}
+.main{
+    &_sectioncta{
+        margin-top: 12.5vh;
+        position: relative;
+        &_imgdiv{
+            overflow: hidden;
+            &_img{
+                object-fit: cover;
+                object-position: -200px;
+            }
+        }
+        &_txtbtn{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            cursor: pointer;
-            &-toggle .headercontainer_mobilemenu_burger_line1 {
-                transform: rotate(-45deg) translate(-5px,5px);
+            align-items: center;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 70%;
+            &_txtdiv{
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 10px;
+                box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+                margin: 0.5rem;
+                z-index: 1;
+                &_title{
+                    font-family: $title-font;
+                    font-weight: 700;
+                    font-size: 1.4rem;
+                    color: $primary-color-hex;
+                    z-index: 100;
+                    margin: 0.5rem;
+                    display: flex;
+                    justify-content: center
+                }
+                &_txt{
+                    @include para();
+                    flex-basis: 33%;
+                    color: black;
+                    margin: 0.5rem;
+                }
             }
-            &-toggle .headercontainer_mobilemenu_burger_line2 {
-                opacity: 0;
-            }
-            &-toggle .headercontainer_mobilemenu_burger_line3 {
-                transform: rotate(45deg) translate(-5px,-5px);
-            }
-            &_line{
-                width: 20px;
-                height: 4px;
-                background-color: $primary-color-hex;
-                margin:1.5px;
-                border-radius: 1rem;
-                transition: all 0.2s ease;
-            }
-        }
-        &_basketdiv{
-            margin-top: 1px;
-            &_basket{
-                font-size: 1.3rem;
-                color: $primary-color-hex;
+            &_btndiv {
+                margin: 3rem 1rem 3rem 1rem;
+                &_btn {
+                    background-color: rgba(231, 140, 2, 0.8);
+                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+                    border-radius: 15px;
+                    font-size: 1.2rem;
+                    width: 100%;
+                    font-family: $text-font;
+                    font-weight: 700;
+                    color: white;
+                    border: none;
+                    text-decoration: none;
+                    padding: 10px 20px 10px 20px;
+
+
+                }
             }
         }
     }
-}
-#maincontainer {
-    margin: 6rem $margin $margin $margin;
-}
-.maincontainer_grid {
-    display: grid;
-    row-gap: 1rem;
-    @include marginandpadding0();
-    &_bloc {
-        list-style: none;
-        &_link {
-            text-decoration: none;
-            &_article { 
-                width: 100%;
-                display: flex;
-                box-shadow: $bloc-shadow; 
-                overflow:hidden;
-                border-radius: 10px;     
-                &_imgdiv {
-                    &_img {
-                        display: block;
-                        width: 150px;
-                        height: 150px;
-                        object-fit: cover;
-                        &-style3 {
-                            object-position: left;
-                        }
-                        &-style5 {
-                            object-position: left;
-                        }
-                    }
+    &_sectionarticle{
+        &_container{
+            &_grid {
+                display: grid;
+                row-gap: 1rem;
+                @include marginandpadding0();
+                &_bloc {
+                    list-style: none;
+                    &_link {
+                        text-decoration: none;
+                        &_article { 
+                            width: 100%;
+                            display: flex;
+                            box-shadow: $bloc-shadow; 
+                            overflow:hidden;
+                            border-radius: 10px;     
+                            &_imgdiv {
+                                &_img {
+                                    display: block;
+                                    width: 145px;
+                                    height: 145px;
+                                    object-fit: cover;
+                                    &-style3 {
+                                        object-position: left;
+                                    }
+                                    &-style5 {
+                                        object-position: left;
+                                    }
+                                }
+                            }
+                            &_nameprice{
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                &_name {
+                                    &_title{
+                                        @include title();
+                                        color: $primary-color-hex;
+                                    }
+                                }
+                                &_desc {
+                                    &_txt {
+                                        width: 125px;
+                                        margin: 0 0 0 $marginmain;
+                                        @include para();
+                                        @include ellipsis();
+                                    }
+                                }
+                                &_price {
+                                    height: 100%;
+                                    display: flex;
+                                    align-items: flex-end;
+                                    justify-content: flex-end;
+                                    &_txt {
+                                        text-align: center;
+                                        margin: $marginmain;
+                                        @include price();
+                                    }
+                                }   
+                            }
+                        }   
+                    }      
                 }
-                &_nameprice{
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    &_name {
-                        &_title{
-                            @include title();
-                        }
-                    }
-                    &_desc {
-                        &_txt {
-                            width: 150px;
-                            margin: 0 0 0 $margin;
-                            @include para();
-                            @include ellipsis();
-                        }
-                    }
-                    &_price {
-                        height: 100%;
-                        display: flex;
-                        align-items: flex-end;
-                        justify-content: flex-end;
-                        &_txt {
-                            text-align: center;
-                            margin: $margin;
-                            @include price();
-                        }
-                    }   
-                }
-            }   
-        }      
+            }
+        }
     }
 }
