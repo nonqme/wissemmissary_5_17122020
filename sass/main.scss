@@ -226,6 +226,7 @@ a:focus {
         }
     }
     &_sectionarticle{
+        margin-top: 1rem;
         &_container{
             &_grid {
                 display: grid;
@@ -291,4 +292,36 @@ a:focus {
             }
         }
     }
+    &_aside{
+        display: grid;
+        row-gap: 1rem;
+        margin:2rem 1rem 1rem 1rem; 
+        box-shadow: $header-shadow;
+        padding: 0.5rem;
+        &_div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &_icon{
+                font-size: 4rem;
+                color: $primary-color-hex;
+            }
+            &_title{
+                margin: 0.5rem;
+                @include title();
+                color: $secondary-color-hex;
+            }
+            &_txt{
+                @include para();
+            }
+            &_stars{
+                color: $primary-color-hex;
+            }
+        }
+    }
+}
+.footer{
+    background-color: $secondary-color-hex;
+    height: 20rem;
 }
