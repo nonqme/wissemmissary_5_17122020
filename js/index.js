@@ -1,8 +1,3 @@
-// var
-let minutes = 1; // to clear the localStorage after 24 hour
-let now = new Date().getTime();
-let setupTime = localStorage.getItem('setupTime');
-
 // Load burger
 window.addEventListener('load',() => {
     expireTime()
@@ -20,10 +15,9 @@ function getData(){
     .catch(error => console.log(error))      
     };
 
-// api to localstorage
+// Recuperer les données et les transferer dans le local storage
 function storeAPI(){
-    localStorage.setItem("teddies", JSON.stringify(teddiesData));                          
-    console.log(JSON.parse(localStorage.getItem("teddies")));
+    localStorage.setItem("teddies", JSON.stringify(teddies));                          
     console.log("Api to localstorage DONE") 
 };
 
@@ -35,35 +29,38 @@ function idStorage(){
 })
 }
 
-// add expiretime to localstorage
+// Verification du timer 
 function expireTime(){
-if (setupTime == null) {
-    localStorage.setItem('setupTime', now)
-    console.log("Notimer in localstorage!")
-    getData()
-} else {
-    if(now-setupTime > minutes*60*1000) {
-        localStorage.clear()
-        localStorage.setItem('setupTime', now);
-        getData()
-        console.log("Time to refresh!")
-        } else {
-            displayData()
-            console.log("No need to refresh !")
+    let minutes = 1; 
+    let now = new Date().getTime();
+    let setupTime = localStorage.getItem('setupTime');
+    if (setupTime == null) { // Si pas de key "setuptime" le créer et apeller l'api
+        localStorage.setItem('setupTime', now)
+        console.log("Notimer in localstorage!")
+        getTeddies()
+    } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api
+        if(now-setupTime > minutes*60*1000) {
+            localStorage.clear()
+            localStorage.setItem('setupTime', now);
+            getTeddies()
+            console.log("Time to refresh!")
+            } else { // Sinon Afficher les données depuis le localstorage
+                displayData()
+                console.log("No need to refresh !")
+            }
         }
     }
-}
 
-// display data
+// Recuperer les données dans le localstorage en fonction de l'url 
 function displayData(){
     let getLocalStorage = JSON.parse(localStorage.getItem("teddies"));
     let displayTeddies = "<ul class=main_sectionarticle_container_grid>";  
     let i=0;  
-    getLocalStorage.forEach(teddies => {
-        console.log(teddies);
+    getLocalStorage.forEach(teddies => { // Pour chaque ours
         i=i+1;
+        // Créer le HTML avec les données reçu
         let creationdivTeddies=`<li class=main_sectionarticle_container_grid_bloc>
-                                    <a href="produit.html?id=${teddies._id}" class="main_sectionarticle_container_grid_bloc_link">
+                                    <a href="product.html?id=${teddies._id}" class="main_sectionarticle_container_grid_bloc_link">
                                         <article class=main_sectionarticle_container_grid_bloc_link_article>
                                             <div class=main_sectionarticle_container_grid_bloc_link_article_imgdiv>
                                                 <img class="main_sectionarticle_container_grid_bloc_link_article_imgdiv_img main_sectionarticle_container_grid_bloc_link_article_imgdiv_img-style${i}" src=${teddies.imageUrl} alt="Photo d'un ours en peluche prénommé ${teddies.name} en vente sur Orinoco pour ${teddies.price}€."></img>
@@ -85,34 +82,10 @@ function displayData(){
         displayTeddies += creationdivTeddies;
     })
     displayTeddies += "</ul>";
-    console.log("HTML DONE")
-
-    // add to container
+    console.log("code HTML crée")
+ // Ajouter le html dans l' index.html
     document.querySelector(".main_sectionarticle_container").innerHTML = displayTeddies;
-    console.log("Add to container DONE")
-}
-
-
-// Burger
-function navSlide(){
-    let burger = document.querySelector(".header_container_mobilemenu_burger");
-    let nav = document.querySelector(".header_container_ul");
-    let navLinks = document.querySelectorAll(".header_container_ul_list");
-    let blurEffect = document.querySelector(".header_container_mobileeffect")
-    // Toggle class and effect on click
-    burger.addEventListener("click",() => {
-        nav.classList.toggle("header_container_ul-active");
-        blurEffect.classList.toggle("header_container_mobileeffect-effect")
-        navLinks.forEach((link, index) => {
-            if(link.style.animation){
-                link.style.animation ="";
-            } else {
-                link.style.animation = `navFade 0.5s ease forwards ${index / 4 + 0.2}s`;
-            }
-        });
-        burger.classList.toggle("header_container_mobilemenu_burger-toggle");
-    });
-    console.log("BURGER LOADED")
+    console.log("Code HTML ajouté au fichier")
 }
 
 

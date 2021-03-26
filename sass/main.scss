@@ -321,6 +321,19 @@ a:focus {
         }
     }
 }
+.mainproductpage {
+    &_article{
+        &_img{
+
+        }
+        &_title{
+
+        }
+        &_desc{
+            
+        }
+    }
+}
 .footer{
     background-color: $secondary-color-hex;
     height: 20rem;
