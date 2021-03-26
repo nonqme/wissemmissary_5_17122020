@@ -15,6 +15,7 @@ function getData(){
     .then(response => response.json())
     .then(data => teddiesData = data)
     .then(storeAPI)
+    .then(idStorage)
     .then(displayData)
     .catch(error => console.log(error))      
     };
@@ -25,6 +26,14 @@ function storeAPI(){
     console.log(JSON.parse(localStorage.getItem("teddies")));
     console.log("Api to localstorage DONE") 
 };
+
+// Création localstorage pour chaque ours
+function idStorage(){
+    let getLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+    getLocalStorage.forEach(teddies => {
+        localStorage.setItem(teddies._id, JSON.stringify(teddies));
+})
+}
 
 // add expiretime to localstorage
 function expireTime(){
@@ -52,7 +61,6 @@ function displayData(){
     let i=0;  
     getLocalStorage.forEach(teddies => {
         console.log(teddies);
-        console.log(teddies._id)
         i=i+1;
         let creationdivTeddies=`<li class=main_sectionarticle_container_grid_bloc>
                                     <a href="produit.html?id=${teddies._id}" class="main_sectionarticle_container_grid_bloc_link">
@@ -75,7 +83,6 @@ function displayData(){
                                     </a>   
                                 </li>`;
         displayTeddies += creationdivTeddies;
-        localStorage.setItem(teddies._id, JSON.stringify(teddies));
     })
     displayTeddies += "</ul>";
     console.log("HTML DONE")
