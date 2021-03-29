@@ -287,6 +287,75 @@ a:focus {
   color: #1D72B3;
 }
 
+.mainproductpage_article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12vh;
+}
+.mainproductpage_article_imgdiv_img {
+  object-fit: cover;
+  height: 300px;
+  width: 100vw;
+}
+.mainproductpage_article_titlediv_title {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.3rem;
+  margin: 0.5rem;
+  color: #1D72B3;
+}
+.mainproductpage_article_descdiv_desc {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  color: black;
+  margin: 0.5rem;
+  text-align: center;
+}
+.mainproductpage_article_pricediv_price {
+  color: #E78C02;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+}
+.mainproductpage_article_colorquantityflex {
+  display: flex;
+  justify-content: center;
+  width: 50vh;
+  margin: 1rem;
+}
+.mainproductpage_article_colorquantityflex-style {
+  margin: 0.5rem;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.3);
+  border: 1px solid #E78C02;
+  border-radius: 0.5rem;
+  outline-offset: 4px;
+  outline-color: #1D72B3;
+  font-family: "Roboto", sans-serif;
+}
+.mainproductpage_article_addtobasket {
+  margin: 0 1rem 1rem 1rem;
+  background-color: rgba(231, 140, 2, 0.8);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: white;
+  border: none;
+  text-decoration: none;
+  padding: 10px 20px 10px 20px;
+}
+.mainproductpage_article_addtobasket:focus {
+  outline-offset: 4px;
+  outline-color: #1D72B3;
+}
+
 .footer {
   background-color: #E78C02;
   height: 20rem;

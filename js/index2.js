@@ -54,9 +54,10 @@ function expireTime(){
 // Recuperer les données dans le localstorage en fonction de l'url 
 function displayData(){
     let getLocalStorage = JSON.parse(localStorage.getItem("teddies"));
-    let displayTeddies = "<ul class=main_sectionarticle_container_grid>";  
+    let displayTeddies = "<ul class=main_sectionarticle_container_grid>"; 
     let i=0;  
     getLocalStorage.forEach(teddies => { // Pour chaque ours
+        let teddiesPrice = teddies.price/100;
         i=i+1;
         // Créer le HTML avec les données reçu
         let creationdivTeddies=`<li class=main_sectionarticle_container_grid_bloc>
@@ -73,7 +74,7 @@ function displayData(){
                                                     <p class=main_sectionarticle_container_grid_bloc_link_article_nameprice_desc_txt>${teddies.description}</p>
                                                 </div>
                                                 <div class=main_sectionarticle_container_grid_bloc_link_article_nameprice_price>
-                                                    <p class=main_sectionarticle_container_grid_bloc_link_article_nameprice_price_txt>${teddies.price}€</p>
+                                                    <p class=main_sectionarticle_container_grid_bloc_link_article_nameprice_price_txt>${teddiesPrice}€</p>
                                                 </div>
                                             </div>
                                         </article>

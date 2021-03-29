@@ -323,14 +323,70 @@ a:focus {
 }
 .mainproductpage {
     &_article{
-        &_img{
-
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 12vh;
+        &_imgdiv{
+            &_img{
+            object-fit: cover;
+            height: 300px;
+            width: 100vw;
+            }
         }
-        &_title{
-
+        &_titlediv{
+            &_title{
+                @include title();
+                color: $primary-color-hex;
+            }
         }
-        &_desc{
-            
+        &_descdiv{
+            &_desc{
+                @include para();
+                margin: $marginmain;
+                text-align: center;
+            }
+        }
+        &_pricediv{
+            &_price{
+                @include price();
+            }
+        }
+        &_colorquantityflex{
+            display: flex;
+            justify-content: center;
+            width: 50vh;
+            margin: 1rem;
+            &-style{
+                margin: $marginmain;
+                cursor: pointer;
+                width: 100px;
+                height: 40px;
+                background-color: white;
+                box-shadow: $bloc-shadow;
+                border: 1px solid $secondary-color-hex;
+                border-radius: 0.5rem;
+                outline-offset: 4px;
+                outline-color: $primary-color-hex;
+                font-family: $text-font;
+            }
+        }
+        &_addtobasket{
+            margin: 0 1rem 1rem 1rem;
+            background-color: rgba(231, 140, 2, 0.8);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-family: $text-font;
+            font-weight: 700;
+            color: white;
+            border: none;
+            text-decoration: none;
+            padding: 10px 20px 10px 20px;
+            &:focus{
+                outline-offset: 4px;
+                outline-color: $primary-color-hex;
+            }
         }
     }
 }
