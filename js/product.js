@@ -2,8 +2,6 @@
 expireTime()
 removeLocalStorageColorQuantity()
 
-
-
 // Verification du timer 
 function expireTime(){
     let minutes = 1; 
@@ -64,30 +62,24 @@ function idStorage(){
 }
 
 // Recuperer les données dans le localstorage en fonction de l'url 
-function displayData(){
+function createTeddyCard(){
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
     let idTeddy = JSON.parse(localStorage.getItem(id))
     let teddyPrice = idTeddy.price/100;
     // Créer le HTML avec les données reçu
-    let displayTeddies = "<article class=mainproductpage_article>";  
-    let creationdivTeddies=`<div class="mainproductpage_article_imgdiv">
-                                <img class="mainproductpage_article_imgdiv_img" src=${idTeddy.imageUrl}></img>
+    let displayTeddies = "<article class=product>";  
+    let creationdivTeddies=`<div class="product__imgwrapper">
+                                <img class="product__img" src=${idTeddy.imageUrl}></img>
                             </div>
-                            <div class="mainproductpage_article_titlediv">
-                                <h1 class="mainproductpage_article_titlediv_title">${idTeddy.name}</h1>
-                            </div> 
-                            <div class="mainproductpage_article_descdiv">   
-                                <p class="mainproductpage_article_descdiv_desc">${idTeddy.description}</p>
-                            </div>
-                            <div class="mainproductpage_article_pricediv">
-                                <p class="mainproductpage_article_pricediv_price">${teddyPrice}€</p>
-                            </div>
-                            <div class="mainproductpage_article_colorquantityflex">
-                                <div class="mainproductpage_article_colorquantityflex_colorslist"></div>
-                                <div class="mainproductpage_article_colorquantityflex_quantity"></div>
+                            <h1 class="product__title">${idTeddy.name}</h1>
+                            <p class="product__desc">${idTeddy.description}</p>
+                            <p class="product__price">${teddyPrice}€</p>
+                            <div class="product__container">
+                                <div class="product__colors"></div>
+                                <div class="product__quantity"></div>
                             </div>    
-                            <button class="mainproductpage_article_addtobasket">Ajouter au panier</button>                           
+                            <button class="product__btn btn--style">Ajouter au panier</button>                           
                             `;
                             
         displayTeddies += creationdivTeddies;
@@ -96,12 +88,17 @@ function displayData(){
     console.log("code HTML crée")
 
     // Ajouter le html dans le Product.html
-    document.querySelector(".mainproductpage").innerHTML = displayTeddies;
+    document.querySelector(".productpagewrapper").innerHTML = displayTeddies;
     console.log("Code HTML ajouté au fichier")
+}
 
-    // Créer la list des couleurs
+// Créer la list des couleurs
+function createColorList(){
+    let params = new URLSearchParams(document.location.search);
+    let id = params.get("id");
+    let idTeddy = JSON.parse(localStorage.getItem(id))  
     let getColors = idTeddy.colors
-    let displayColors = `<select onchange="colorList()" class="mainproductpage_article_colorquantityflex_colorlist_select mainproductpage_article_colorquantityflex-style">
+    let displayColors = `<select onchange="colorList()" class="product__colors__select product__list--style">
                         <option value=colorNone selected>Couleur</option>
                         `;     
     getColors.forEach(getColors => {
@@ -113,11 +110,13 @@ function displayData(){
     console.log("code HTML de la list de couleur crée")
 
     // Ajouter la list de couleur dans le Product.html
-    document.querySelector(".mainproductpage_article_colorquantityflex_colorslist").innerHTML = displayColors;
+    document.querySelector(".product__colors").innerHTML = displayColors;
     console.log("Code HTML de la list de couleur ajouté au fichier")
+}
 
-    // Créer la list Quantité
-    let displayQuantity = `<select onchange="quantityList()" class="mainproductpage_article_colorquantityflex_quantity_select mainproductpage_article_colorquantityflex-style">
+// Créer la list Quantité
+function createQuantityList(){
+    let displayQuantity = `<select onchange="quantityList()" class="product__quantity__select product__list--style">
                         <option value=quantityNone selected>Quantité</option>
                         `;     
     let creationDivQuantity = `<option value=1>1</option>
@@ -132,13 +131,20 @@ function displayData(){
     console.log("code HTML de la quantité crée")
 
     // Ajouter la list de la quantité dans le Product.html
-    document.querySelector(".mainproductpage_article_colorquantityflex_quantity").innerHTML = displayQuantity;
+    document.querySelector(".product__quantity").innerHTML = displayQuantity;
     console.log("Code HTML pour la quantité ajouté au fichier")
+}
+
+// Apelle les fonctions pour afficher le produit, les couleurs et la quantité
+function displayData() {
+    createTeddyCard();
+    createColorList();
+    createQuantityList();
 }
 
 // Enregistre la couleur selectionné dans le localStorage
 function colorList() {
-    let colorValue = document.querySelector(".mainproductpage_article_colorquantityflex_colorlist_select").value;
+    let colorValue = document.querySelector(".product__colors__select").value;
     if (colorValue == "colorNone"){ // Si la value selectionné est none alors enlever la couleur du localstorage
         localStorage.removeItem("selectedColor", colorValue)
         console.log("Couleur enlevé au localstorage")
@@ -150,7 +156,7 @@ function colorList() {
 
 // Enregistre la couleur selectionné dans le localStorage
 function quantityList() {
-    let quantityValue = document.querySelector(".mainproductpage_article_colorquantityflex_quantity_select").value;
+    let quantityValue = document.querySelector(".product__quantity__select").value;
     if (quantityValue == "quantityNone"){ // Si la value selectionné est none alors enlever la couleur du localstorage
         localStorage.removeItem("selectedQuantity", quantityValue)
         console.log("Nombre de produit enlevé au localstorage")
@@ -168,7 +174,7 @@ function removeLocalStorageColorQuantity() {
 
 // Ajoute l'objet, la quantité et la couleur selectionné au panié
 function addToBasket() {
-    let addToBasketButton = document.querySelector(".mainproductpage_article_addtobasket")
+    let addToBasketButton = document.querySelector(".product__btn")
     addToBasketButton.addEventListener("click", () => {            
         let quantityValue = localStorage.getItem("selectedQuantity")
         let colorValue = localStorage.getItem("selectedColor")

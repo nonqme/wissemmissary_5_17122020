@@ -1,395 +1,261 @@
-$primary-color-hex: #1D72B3;
-$secondary-color-hex: #E78C02;
-$header-background-color: white;
-$header-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
-$bloc-shadow: 5px 5px 11px rgba(0,0,0,0.3);
-$text-font: 'Roboto', sans-serif;
-$title-font: 'Nunito', sans-serif;
-$marginmain: 0.5rem;
-$burger-transition: all 0.2s ease;
-$mobilemenu-transition: transform 0.2s ease-in;
-
-@keyframes navFade{
-    from{
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to{
-        opacity: 1;
-        transform: translateX(0px);
-    }
+@import "variables";
+@import "reset";
+@import "mixins";
+@import "keyframes";
+@import "placeholders";
+*:focus{
+    &:focus{
+        outline-offset: 4px;
+        outline-color: $primary-color-hex;
 }
-@mixin flexcolumnaligncenterspaceevenly {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
 }
-@mixin flexbetween {
-    display: flex;
-    justify-content: space-between;
+a {
+    text-decoration: none;
 }
-@mixin marginandpadding0 {
-    margin: 0;
-    padding: 0;    
-}
-
-@mixin title {
-    font-family: $title-font;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 1.3rem;
-    margin: $marginmain;
-}
-
-@mixin para {
-    font-family: $text-font;
-    font-size: 0.9rem;
-    color: black;
-}
-
-@mixin price {
-    color: $secondary-color-hex;
-    font-size: 1.2rem;
-    font-weight: 700;
-    font-family: $text-font;
-}
-
-@mixin ellipsis {
-    white-space: nowrap;
+.fixed-position{
     overflow: hidden;
-    text-overflow: ellipsis;
-}
-.bodycontainer {
-    @include marginandpadding0();
 }
 
-a:focus {
-    outline-offset: 4px;
-    outline-color: $primary-color-hex;
+main{
+    overflow: hidden;
 }
 
-
-.header{
+.header {
+    @include flexAlignJustify(center, space-between);
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
+    height: 12vh;
     background-color: $header-background-color;
     box-shadow: $header-shadow;
     z-index: 10;
-    &_container{
-        @include flexbetween();
-        height: 12vh;
-        &_logodiv{
-            display: flex;
-            align-items: center;
-            margin: 1rem;
-            &_img{
-                width: 130px;
-            }
-        }
-        &_mobilemenu {
-            @include flexbetween();
-            flex-direction: row-reverse;
-            align-items: center;
-            flex-basis: 28%;
-            margin: 1rem;
-            &_burger{
-                display: flex;
-                flex-direction: column;
-                cursor: pointer;
-                &-toggle .headercontainer_mobilemenu_burger_line1 {
-                    transform: rotate(-45deg) translate(-5px,5px);
-                }
-                &-toggle .headercontainer_mobilemenu_burger_line2 {
-                    opacity: 0;
-                }
-                &-toggle .headercontainer_mobilemenu_burger_line3 {
-                    transform: rotate(45deg) translate(-5px,-5px);
-                }
-                &_line{
-                    width: 20px;
-                    height: 4px;
-                    background-color: $primary-color-hex;
-                    margin:1.5px;
-                    border-radius: 1rem;
-                    transition: $burger-transition;
-                }
-            }
-            &_basketdiv{
-                &_basket{
-                    font-size: 1.3rem;
-                    color: $primary-color-hex;
-                }
-            }
-        }
-        &_ul {
+    &__logowrapper{
+        margin: $textmarginmobile;   
+    }
+    &__logo{
+        width: 130px;
+    }
+    &__nav{
+        @include flexDirectionAlignJustify(row-reverse, center, space-between);
+        flex-basis: 30%;
+        margin: $textmarginmobile;
+        &__ul{
+            @include flexDirectionAlignJustify(column, center, space-evenly);
             position: absolute;
             right: 0px;
-            height: 88vh;
             top: 12vh;
+            height: 88vh;
             width: 60%;
             background-color: $header-background-color;
-            @include marginandpadding0();
-            @include flexcolumnaligncenterspaceevenly();
             transform: translateX(100%);
             transition: $mobilemenu-transition;
-            &-active{
+            
+            &--effect{
                 transform:translateX(0%);
             }
-            &_list {
-                list-style: none;
-                opacity: 0;
-                &_link{
-                    text-decoration: none;
-                    @include title();
-                    color: $secondary-color-hex;
-                }
-            }
         }
-        &_mobileeffect{
+        &__menueffect{
             position: absolute;
             left: 0px;
-            height: 88vh;
             top: 12vh;
+            height: 88vh;
             width: 40%;
-            background-color:rgba(0,0,0,.7);
+            background-color:rgba(29, 114, 179,0.7);
             transform: translateX(-100%);
             transition: $mobilemenu-transition;
-            &-effect{
+            &--effect{
                 transform: translateX(0%);
             }
         }
+        &__list{
+            opacity: 0;
+        }
+        &__link{
+            @extend %title;
+            color: $secondary-color-hex;
+        }
+        &__basketicon{
+            font-size: 1.3rem;
+            color: $primary-color-hex;
+        }
     }
 }
-.main{
-    &_sectioncta{
-        margin-top: 12.5vh;
-        position: relative;
-        &_imgdiv{
-            overflow: hidden;
-            &_img{
-                object-fit: cover;
-                object-position: -200px;
-            }
-        }
-        &_txtbtn{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 70%;
-            &_txtdiv{
-                background-color: rgba(255, 255, 255, 0.8);
-                border-radius: 10px;
-                box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
-                margin: 0.5rem;
-                z-index: 1;
-                &_title{
-                    font-family: $title-font;
-                    font-weight: 700;
-                    font-size: 1.4rem;
-                    color: $primary-color-hex;
-                    z-index: 100;
-                    margin: 0.5rem;
-                    display: flex;
-                    justify-content: center
-                }
-                &_txt{
-                    @include para();
-                    flex-basis: 33%;
-                    color: black;
-                    margin: 0.5rem;
-                }
-            }
-            &_btndiv {
-                margin: 3rem 1rem 3rem 1rem;
-                &_btn {
-                    background-color: rgba(231, 140, 2, 0.8);
-                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-                    border-radius: 15px;
-                    font-size: 1.2rem;
-                    width: 100%;
-                    font-family: $text-font;
-                    font-weight: 700;
-                    color: white;
-                    border: none;
-                    text-decoration: none;
-                    padding: 10px 20px 10px 20px;
 
+.burgericon{
+    @include flexDirectionAlignJustify(column, center, center);
+    cursor: pointer;
+    &__line{
+        width: 20px;
+        height: 4px;
+        background-color: $primary-color-hex;
+        margin:1.5px;
+        border-radius: 1rem;
+        transition: $burger-transition;
+    }
+    &--toggle .burgericon__line1 {
+        transform: rotate(-45deg) translate(-5px,5px);
+    }
+    &--toggle .burgericon__line2 {
+        opacity: 0;
+    }
+    &--toggle .burgericon__line3 {
+        transform: rotate(45deg) translate(-5px,-5px);
+    }
+}
 
-                }
-            }
+.cta {
+    position: relative;
+    overflow: hidden;
+    margin-top: 12.5vh;
+    &__img{
+        object-fit: cover;
+        object-position: -200px;
+    }
+    &__container{
+        @include flexDirectionAlignJustify(column, center, center);
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 65%;
+        &--style{
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+            margin: $textmarginmobile;
         }
     }
-    &_sectionarticle{
-        margin-top: 1rem;
-        &_container{
-            &_grid {
-                display: grid;
-                row-gap: 1rem;
-                @include marginandpadding0();
-                &_bloc {
-                    list-style: none;
-                    &_link {
-                        text-decoration: none;
-                        &_article { 
-                            width: 100%;
-                            display: flex;
-                            box-shadow: $bloc-shadow; 
-                            overflow:hidden;
-                            border-radius: 10px;     
-                            &_imgdiv {
-                                &_img {
-                                    display: block;
-                                    width: 145px;
-                                    height: 145px;
-                                    object-fit: cover;
-                                    &-style3 {
-                                        object-position: left;
-                                    }
-                                    &-style5 {
-                                        object-position: left;
-                                    }
-                                }
-                            }
-                            &_nameprice{
-                                width: 100%;
-                                display: flex;
-                                flex-direction: column;
-                                &_name {
-                                    &_title{
-                                        @include title();
-                                        color: $primary-color-hex;
-                                    }
-                                }
-                                &_desc {
-                                    &_txt {
-                                        width: 125px;
-                                        margin: 0 0 0 $marginmain;
-                                        @include para();
-                                        @include ellipsis();
-                                    }
-                                }
-                                &_price {
-                                    height: 100%;
-                                    display: flex;
-                                    align-items: flex-end;
-                                    justify-content: flex-end;
-                                    &_txt {
-                                        text-align: center;
-                                        margin: $marginmain;
-                                        @include price();
-                                    }
-                                }   
-                            }
-                        }   
-                    }      
-                }
-            }
-        }
+    &__title{
+        @include flexAlignJustify(center, center);
+        @extend %title;
+        color: $primary-color-hex;
     }
-    &_aside{
+    &__txt{
+        @extend %para;
+        flex-basis: 33%;
+    }
+    &__btn{
+        margin: 2rem 0;
+    }
+}
+
+.btn--style{
+    @extend %btn;
+}
+
+.cardwrapper{
+    margin-top: 1rem;
+    &__grid{
         display: grid;
         row-gap: 1rem;
-        margin:2rem 1rem 1rem 1rem; 
-        box-shadow: $header-shadow;
-        padding: 0.5rem;
-        &_div{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            &_icon{
-                font-size: 4rem;
-                color: $primary-color-hex;
-            }
-            &_title{
-                margin: 0.5rem;
-                @include title();
-                color: $secondary-color-hex;
-            }
-            &_txt{
-                @include para();
-            }
-            &_stars{
-                color: $primary-color-hex;
-            }
-        }
     }
 }
-.mainproductpage {
-    &_article{
+
+.card{
+    box-shadow: $card-shadow; 
+    overflow:hidden;
+    border-radius: 10px;
+    &__flex{
+        display: flex;
+    }
+    &__img{
+        display: block;
+        width: 145px;
+        height: 145px;
+        object-fit: cover;
+        &--style3 {
+            object-position: left;
+        }
+        &--style5 {
+            object-position: left;
+        }
+    }
+    &__container{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin-top: 12vh;
-        &_imgdiv{
-            &_img{
-            object-fit: cover;
-            height: 300px;
-            width: 100vw;
-            }
-        }
-        &_titlediv{
-            &_title{
-                @include title();
-                color: $primary-color-hex;
-            }
-        }
-        &_descdiv{
-            &_desc{
-                @include para();
-                margin: $marginmain;
-                text-align: center;
-            }
-        }
-        &_pricediv{
-            &_price{
-                @include price();
-            }
-        }
-        &_colorquantityflex{
-            display: flex;
-            justify-content: center;
-            width: 50vh;
-            margin: 1rem;
-            &-style{
-                margin: $marginmain;
-                cursor: pointer;
-                width: 100px;
-                height: 40px;
-                background-color: white;
-                box-shadow: $bloc-shadow;
-                border: 1px solid $secondary-color-hex;
-                border-radius: 0.5rem;
-                outline-offset: 4px;
-                outline-color: $primary-color-hex;
-                font-family: $text-font;
-            }
-        }
-        &_addtobasket{
-            margin: 0 1rem 1rem 1rem;
-            background-color: rgba(231, 140, 2, 0.8);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-family: $text-font;
-            font-weight: 700;
-            color: white;
-            border: none;
-            text-decoration: none;
-            padding: 10px 20px 10px 20px;
-            &:focus{
-                outline-offset: 4px;
-                outline-color: $primary-color-hex;
-            }
-        }
+        width: 100%
+    }
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+        flex-basis: 10%;
+    }
+    &__desc{
+        width: 150px;
+        margin-left: $textmarginmobile;
+        @extend %para;
+        @extend %ellipsis;
+        flex-basis: 80%
+    }
+    &__price{
+        @include flexAlignJustify(flex-end, flex-end);
+        margin: $textmarginmobile;
+        @extend %price;
+        flex-basis: 10%;
     }
 }
+
+.info{
+    display: grid;
+    row-gap: 1rem;
+    margin:2rem 1rem 1rem 1rem; 
+    box-shadow: $header-shadow;
+    &__card{
+        @include flexDirectionAlignJustify(column, center, center);
+    }
+    &__icon{
+        font-size: 4rem;
+        color: $primary-color-hex;
+        margin:$textmarginmobile;
+    }
+    &__title{
+        @extend %title;
+        color: $secondary-color-hex;
+    }
+    &__txt{
+        @extend %para;
+    }
+    &__star{
+        color: $primary-color-hex;
+    }
+}
+
+.product{
+    @include flexDirectionAlignJustify(column, center, center);
+    margin-top: 12vh;
+    &__imgwrapper{
+        margin-bottom: 1rem;
+    }
+    &__img{
+        object-fit: cover;
+        height: 300px;
+        width: 100%;
+    }
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+    }
+    &__desc{
+        @extend %para;
+        margin: $textmarginmobile;
+        text-align: center;
+    }
+    &__price{
+        @extend %price;
+    }
+    &__container{
+        @include flexAlignJustify(center, center);
+        margin: 2rem 0;
+    }
+    &__list--style{
+        @extend %selectlist;
+        margin: $textmarginmobile;
+    }
+    &__btn{
+        margin: 1rem 0 3rem 0;
+        border-style: none;
+    }
+}
+
 .footer{
     background-color: $secondary-color-hex;
     height: 20rem;
