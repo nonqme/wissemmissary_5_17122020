@@ -317,7 +317,7 @@ main {
 .info {
   display: grid;
   row-gap: 1rem;
-  margin: 2rem 1rem 1rem 1rem;
+  margin: 13vh 1rem 1rem 1rem;
   box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
 }
 .info__card {

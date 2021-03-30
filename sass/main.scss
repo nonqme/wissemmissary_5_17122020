@@ -197,7 +197,7 @@ main{
 .info{
     display: grid;
     row-gap: 1rem;
-    margin:2rem 1rem 1rem 1rem; 
+    margin:13vh 1rem 1rem 1rem; 
     box-shadow: $header-shadow;
     &__card{
         @include flexDirectionAlignJustify(column, center, center);
