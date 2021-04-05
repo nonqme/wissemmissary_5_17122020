@@ -1,13 +1,12 @@
 // Appelle des fonctions
 expireTime()
-removeLocalStorageColorQuantity()
 
 // Verification du timer 
 function expireTime(){
-    let minutes = 1; 
+    let minutes = 5; 
     let now = new Date().getTime();
     let setupTime = localStorage.getItem('setupTime');
-    if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
+    if (setupTime === null) {  // Si pas de key "setuptime" le créer et apeller l'api
         localStorage.setItem('setupTime', now)
         console.log("Pas de setupTime dans localstorage!")
         getTeddies() 
@@ -17,13 +16,13 @@ function expireTime(){
             localStorage.setItem('setupTime', now);
             getTeddies()
             console.log("Mise à jours")
-            } else { // Sinon Afficher les données depuis le localstorage
-                displayData()
-                addToBasket()
-                console.log("Pas de mise à jours")
-            }
+        } else { // Sinon Afficher les données depuis le localstorage
+            displayData()
+            addToBasket()
+            console.log("Pas de mise à jours")
         }
     }
+}
 
 //Appelle de l'API pour récupérer les données de chaques articles disponibles 
 async function getTeddies() {
@@ -65,15 +64,15 @@ function idStorage(){
 function createTeddyCard(){
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
-    let idTeddy = JSON.parse(localStorage.getItem(id))
-    let teddyPrice = idTeddy.price/100;
+    let teddy = JSON.parse(localStorage.getItem(id))
+    let teddyPrice = teddy.price/100;
     // Créer le HTML avec les données reçu
     let displayTeddies = "<article class=product>";  
     let creationdivTeddies=`<div class="product__imgwrapper">
-                                <img class="product__img" src=${idTeddy.imageUrl}></img>
+                                <img class="product__img" src=${teddy.imageUrl}></img>
                             </div>
-                            <h1 class="product__title">${idTeddy.name}</h1>
-                            <p class="product__desc">${idTeddy.description}</p>
+                            <h1 class="product__title">${teddy.name}</h1>
+                            <p class="product__desc">${teddy.description}</p>
                             <p class="product__price">${teddyPrice}€</p>
                             <div class="product__container">
                                 <div class="product__colors"></div>
@@ -96,9 +95,9 @@ function createTeddyCard(){
 function createColorList(){
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
-    let idTeddy = JSON.parse(localStorage.getItem(id))  
-    let getColors = idTeddy.colors
-    let displayColors = `<select onchange="colorList()" class="product__colors__select product__list--style">
+    let teddy = JSON.parse(localStorage.getItem(id))  
+    let getColors = teddy.colors
+    let displayColors = `<select class="product__colors__select product__list--style">
                         <option value=colorNone selected>Couleur</option>
                         `;     
     getColors.forEach(getColors => {
@@ -116,7 +115,7 @@ function createColorList(){
 
 // Créer la list Quantité
 function createQuantityList(){
-    let displayQuantity = `<select onchange="quantityList()" class="product__quantity__select product__list--style">
+    let displayQuantity = `<select class="product__quantity__select product__list--style">
                         <option value=quantityNone selected>Quantité</option>
                         `;     
     let creationDivQuantity = `<option value=1>1</option>
@@ -142,55 +141,26 @@ function displayData() {
     createQuantityList();
 }
 
-// Enregistre la couleur selectionné dans le localStorage
-function colorList() {
-    let colorValue = document.querySelector(".product__colors__select").value;
-    if (colorValue == "colorNone"){ // Si la value selectionné est none alors enlever la couleur du localstorage
-        localStorage.removeItem("selectedColor", colorValue)
-        console.log("Couleur enlevé au localstorage")
-    } else { // sinon ajouter la couleur au localstorage
-        localStorage.setItem("selectedColor", colorValue)
-        console.log("Couleur ajouté au localstorage")
-    }
-}
-
-// Enregistre la couleur selectionné dans le localStorage
-function quantityList() {
-    let quantityValue = document.querySelector(".product__quantity__select").value;
-    if (quantityValue == "quantityNone"){ // Si la value selectionné est none alors enlever la couleur du localstorage
-        localStorage.removeItem("selectedQuantity", quantityValue)
-        console.log("Nombre de produit enlevé au localstorage")
-    } else { // sinon ajouter la couleur au localstorage
-        localStorage.setItem("selectedQuantity", quantityValue)
-        console.log("Nombre de produit ajouté au localstorage")
-    }
-}
-// Regrouper les données sur le produit que le client veux ajouter au panier
-function removeLocalStorageColorQuantity() {
-    localStorage.removeItem("selectedQuantity")
-    localStorage.removeItem("selectedColor")
-}
 
 
 // Ajoute l'objet, la quantité et la couleur selectionné au panié
 function addToBasket() {
     let addToBasketButton = document.querySelector(".product__btn")
     addToBasketButton.addEventListener("click", () => {            
-        let quantityValue = localStorage.getItem("selectedQuantity")
-        let colorValue = localStorage.getItem("selectedColor")
+        let quantityValue = document.querySelector(".product__quantity__select").value;
+        let colorValue = document.querySelector(".product__colors__select").value;
         console.log(colorValue)
         console.log(quantityValue)
-        console.log("testsetsetset")
-        if ((quantityValue==null) && (colorValue==null)){
+        if ((quantityValue==="quantityNone") && (colorValue==="colorNone")){
             window.alert("Veuillez choisir la couleur et la quantité de peluche que vous souhaitez")
         } else {
-            if ((quantityValue!==null) && (colorValue==null)){
+            if ((quantityValue!=="quantityNone") && (colorValue==="colorNone")){
                 window.alert("Veuillez choisir la couleur que vous souhaitez")
             }
-            if ((quantityValue==null) && (colorValue!==null)){
+            if ((quantityValue==="quantityNone") && (colorValue!=="colorNone")){
                 window.alert("Veuillez choisir la quantité de peluche que vous souhaitez")
             }
-            if ((quantityValue!==null) && (colorValue!==null)){
+            if ((quantityValue!=="quantityNone") && (colorValue!=="colorNone")){
                 window.alert("Produit ajouté au panier")
                 addItemBasket();
             }
@@ -203,31 +173,41 @@ function addToBasket() {
 function addItemBasket () {
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
-    let idTeddy = JSON.parse(localStorage.getItem(id))
-    let teddyQuantity = localStorage.getItem("selectedQuantity")
-    let teddyColor = localStorage.getItem("selectedColor")
+    let teddy = JSON.parse(localStorage.getItem(id))
+    let teddyQuantity = parseInt(document.querySelector(".product__quantity__select").value);
+    let teddyColor = document.querySelector(".product__colors__select").value;
     let basketItem = []
+    let teddyPrice = teddy.price/100;
+    let test = true;
 
     // stockage dans un array
-    let saveItemBasket = {
-        _id: idTeddy._id,
-        imageUrl: idTeddy.imageUrl,
-        name: idTeddy.name,
-        price: idTeddy.price,
+    let basketArray = {
+        _id: teddy._id,
+        imageUrl: teddy.imageUrl,
+        name: teddy.name,
+        price: teddyPrice,
         quantity: teddyQuantity,
-        selectColors: teddyColor
+        color: teddyColor
     }
-    let otherItem = true;
+
     // Si le localstorage est vide créer un nouveau array basketItem et le push dans le localStorage
-    if (localStorage.getItem('basketItem') === null) {
-        basketItem.push(saveItemBasket);
-        localStorage.setItem('basketItem', JSON.stringify(basketItem));
+    if (localStorage.getItem("basketItem") === null) {
+        basketItem.push(basketArray);
+        localStorage.setItem("basketItem", JSON.stringify(basketItem));
     } 
     // Sinon recupérer le tableau du localStorage, ajouter le nouveau produit, et enregistrer le nouvelle array
-    else { 
-      let basketItem = JSON.parse(localStorage.getItem('basketItem'));
-    if (otherItem) basketItem.push(saveItemBasket);
-    localStorage.setItem('basketItem', JSON.stringify(basketItem));
-}
-
+    else {
+        let basketItem = JSON.parse(localStorage.getItem("basketItem"));
+        basketItem.forEach(item => {
+            if ((teddyColor === item.color) && (teddy._id === item._id)){
+                item.quantity += teddyQuantity;
+                localStorage.setItem("basketItem", JSON.stringify(basketItem));
+                test = false;
+            }
+        })
+    if (test) {
+            basketItem.push(basketArray);
+            localStorage.setItem("basketItem", JSON.stringify(basketItem));
+        }  
+    }
 }
