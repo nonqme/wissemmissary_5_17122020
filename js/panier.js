@@ -22,7 +22,10 @@ function createBasket(){
                                     <div class="basket__product__txtwrapper">
                                         <h1 class="basket__product__title">${item.name}</h1>
                                         <p class="basket__product__colors basket__product--txt">Couleur : ${item.color}</p>
-                                        <p class="basket__product__quantity basket__product--txt">Quantité : ${item.quantity}</p> 
+                                        <div class="basket__product__quantitywrapper">
+                                            <label for="teddyquantity" class="basket__product--txt">Quantité :</label>
+                                            <input min="0" max="100" class="basket__product__quantity basket__product--txt" type="number" id="teddyquantity" name="tentacles" value="${item.quantity}">
+                                        </div>
                                         <p class="basket__product__price basket__product--txt">Prix Total : ${itemPrice}€</p>
                                     </div>    
                                 </div>                        
@@ -47,5 +50,8 @@ function createEmptyBasket(){
     document.querySelector(".basket").innerHTML = displayTeddies;
     console.log("Code HTML ajouté au fichier")
 }
+
+
+
 
 getBasket();

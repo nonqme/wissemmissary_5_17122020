@@ -267,10 +267,13 @@ main{
     &__title{
         @extend %title;
         color: $primary-color-hex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 117px;
     }  
     &__wrapper{
         display: flex;
-
         margin-bottom: 1rem;
         box-shadow: $header-shadow;
         overflow: hidden;
@@ -282,6 +285,12 @@ main{
     }
     &--txt{
         @extend %para;
+    }
+    &__quantitywrapper{
+        @include flexAlignJustify(center, center);
+    }
+    &__quantity{
+        width: 50px;
     }
 }
 .basket__empty{

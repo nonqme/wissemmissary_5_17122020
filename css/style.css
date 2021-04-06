@@ -389,6 +389,10 @@ main {
 }
 .basket__product__title {
   color: #1D72B3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 117px;
 }
 .basket__product__wrapper {
   display: flex;
@@ -404,6 +408,15 @@ main {
   justify-content: space-between;
   width: 100%;
 }
+.basket__product__quantitywrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.basket__product__quantity {
+  width: 50px;
+}
+
 .basket__empty {
   display: flex;
   align-items: center;
