@@ -1,22 +1,34 @@
+// test timer
+function testTime(){
+    let minutes = 5; 
+    let now = new Date().getTime();
+    let setupTime = localStorage.getItem('setupTime');
+    if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
+        getTeddies()
+    } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api
+        if(now-setupTime > minutes*60*1000) {
+            getTeddies()
+            }else {
+                displayData()
+            } 
+        }
+    }
+
 // Verification du timer 
 function expireTime(){
-    let minutes = 1; 
+    let minutes = 5; 
     let now = new Date().getTime();
     let setupTime = localStorage.getItem('setupTime');
     if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
         localStorage.setItem('setupTime', now)
         console.log("Pas de setupTime dans localstorage!")
-        getTeddies() 
     } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api
         if(now-setupTime > minutes*60*1000) {
             localStorage.clear()
-            localStorage.setItem('setupTime', now);
-            getTeddies()
+            localStorage.setItem('setupTime', now);          
             console.log("Mise à jours")
-            } else { // Sinon Afficher les données depuis le localstorage
-                displayData()
-                console.log("Pas de mise à jours")
-            }
+            getTeddies()
+            } 
         }
     }
 
@@ -28,6 +40,7 @@ async function getTeddies() {
         if (response.ok) { // Si la réponse est ok executer les fonctions nécessaire
             let teddies = await response.json();
             storeAPI(teddies)
+            expireTime(teddies)
             idStorage(teddies)
             displayData(teddies)
             console.log("API chargée")
@@ -43,7 +56,7 @@ async function getTeddies() {
 function storeAPI(teddies){
     localStorage.setItem("teddies", JSON.stringify(teddies));                          
     console.log("API chargée dans le localstorage") 
-};
+}
 
 
 // Création localstorage pour chaque ours
@@ -87,4 +100,4 @@ function displayData(){
     console.log("Code HTML ajouté au fichier")
 }
 
-expireTime()
+testTime()

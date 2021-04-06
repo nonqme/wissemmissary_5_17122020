@@ -255,6 +255,45 @@ main{
         border-style: none;
     }
 }
+.basket__product{
+    margin-top: 14vh;
+    @include flexDirectionAlignJustify(column, center, center);
+    &__img{
+        display: block;
+        width: 145px;
+        height: 145px;
+        object-fit: cover;
+    }
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+    }  
+    &__wrapper{
+        display: flex;
+
+        margin-bottom: 1rem;
+        box-shadow: $header-shadow;
+        overflow: hidden;
+        width: 95%;
+    }
+    &__txtwrapper{
+        @include flexDirectionAlignJustify(column, flex-start, space-between);
+        width: 100%;      
+    }
+    &--txt{
+        @extend %para;
+    }
+}
+.basket__empty{
+    @include flexAlignJustify(center, center);
+    @extend %title;
+    margin: 0;
+    margin-top: 14vh;
+    height: 80vh;
+    width: 100%;
+    color: $secondary-color-hex;
+    
+}
 
 .footer{
     background-color: $secondary-color-hex;
