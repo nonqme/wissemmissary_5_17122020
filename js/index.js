@@ -3,9 +3,9 @@ function testTime(){
     let minutes = 5; 
     let now = new Date().getTime();
     let setupTime = localStorage.getItem('setupTime');
-    if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
+    if (setupTime == null) {  // Si pas de key "setuptime" apeller l'api
         getTeddies()
-    } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api
+    } else { // Sinon si le timer est expiré, apeller l'api
         if(now-setupTime > minutes*60*1000) {
             getTeddies()
             }else {
@@ -19,7 +19,7 @@ function expireTime(){
     let minutes = 5; 
     let now = new Date().getTime();
     let setupTime = localStorage.getItem('setupTime');
-    if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
+    if (setupTime == null) {  // Si pas de key "setuptime" le créer
         localStorage.setItem('setupTime', now)
         console.log("Pas de setupTime dans localstorage!")
     } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api

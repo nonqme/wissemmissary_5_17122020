@@ -1,17 +1,22 @@
 // Appelle des fonctions
 testTime()
-
+function test(){
+    let data = {};
+    data.minutes = 5; 
+    data.now = new Date().getTime();
+    data.setupTime = localStorage.getItem('setupTime');
+    return data;
+    
+}
 // test timer
 function testTime(){
-    let minutes = 5; 
-    let now = new Date().getTime();
-    let setupTime = localStorage.getItem('setupTime');
-    if (setupTime == null) {  // Si pas de key "setuptime" le créer et apeller l'api
+    let data = test();
+    if (data.setupTime == null) {  // Si pas de key "setuptime" apeller l'api
         getTeddies()
-    } else { // Sinon si le timer est expiré vider le localstorage et apeller l'api
-        if(now-setupTime > minutes*60*1000) {
+    } else { // Sinon si le timer est expiréa, apeller l'api
+        if(data.now-data.setupTime > data.minutes*60*1000) {
             getTeddies()
-            }else {
+            }else { // sinon afficher les données
                 displayData()
                 addToBasket()
             } 
@@ -188,9 +193,9 @@ function addItemBasket () {
     let teddy = JSON.parse(localStorage.getItem(id))
     let teddyQuantity = parseInt(document.querySelector(".product__quantity__select").value);
     let teddyColor = document.querySelector(".product__colors__select").value;
-    let basketItem = []
+    let basketItem = [];
     let teddyPrice = teddy.price/100;
-    let test = true;
+    let newTeddy = true;
 
     // stockage dans un array
     let basketArray = {
@@ -214,12 +219,13 @@ function addItemBasket () {
             if ((teddyColor === item.color) && (teddy._id === item._id)){
                 item.quantity += teddyQuantity;
                 localStorage.setItem("basketItem", JSON.stringify(basketItem));
-                test = false;
+                newTeddy = false;  
             }
         })
-    if (test) {
+        if (newTeddy) {
             basketItem.push(basketArray);
             localStorage.setItem("basketItem", JSON.stringify(basketItem));
         }  
     }
+    console.log(basketItem);
 }
