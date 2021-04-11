@@ -62,7 +62,7 @@ table {
     transform: translateX(0px);
   }
 }
-.basket__empty, .basket__product__title, .product__title, .info__title, .card__title, .cta__title, .header__nav__link {
+.total__title, .basket__empty, .basket__product__title, .product__title, .info__title, .card__title, .cta__title, .header__nav__link {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -79,7 +79,7 @@ table {
   color: black;
 }
 
-.product__price, .card__price {
+.total__txt, .basket__product__price, .product__price, .card__price {
   color: #E78C02;
   font-size: 1.3rem;
   font-weight: 700;
@@ -343,7 +343,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 12vh;
+  margin-top: 13vh;
 }
 .product__imgwrapper {
   margin-bottom: 1rem;
@@ -374,15 +374,21 @@ main {
   border-style: none;
 }
 
-.basket__product {
-  margin-top: 14vh;
+.basket {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 14vh;
+}
+
+.basket__product {
+  margin-bottom: 1rem;
+  box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
+  overflow: hidden;
+  width: 97%;
 }
 .basket__product__img {
-  display: block;
   width: 145px;
   height: 145px;
   object-fit: cover;
@@ -396,10 +402,7 @@ main {
 }
 .basket__product__wrapper {
   display: flex;
-  margin-bottom: 1rem;
-  box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
-  overflow: hidden;
-  width: 95%;
+  position: relative;
 }
 .basket__product__txtwrapper {
   display: flex;
@@ -414,7 +417,19 @@ main {
   justify-content: center;
 }
 .basket__product__quantity {
-  width: 50px;
+  width: 20px;
+}
+.basket__product__times {
+  position: absolute;
+  color: #E78C02;
+  right: 0;
+  font-size: 1.2rem;
+  box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
+  padding: 0.2rem;
+}
+.basket__product__price {
+  color: #E78C02;
+  align-self: flex-end;
 }
 
 .basket__empty {
@@ -426,6 +441,23 @@ main {
   height: 80vh;
   width: 100%;
   color: #E78C02;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem;
+}
+.total__title {
+  color: #1D72B3;
+}
+.total__txt {
+  color: #E78C02;
+}
+
+.confirm {
+  margin-top: 13vh;
 }
 
 .footer {

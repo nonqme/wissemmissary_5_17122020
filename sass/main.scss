@@ -221,7 +221,7 @@ main{
 
 .product{
     @include flexDirectionAlignJustify(column, center, center);
-    margin-top: 12vh;
+    margin-top: 13vh;
     &__imgwrapper{
         margin-bottom: 1rem;
     }
@@ -255,11 +255,16 @@ main{
         border-style: none;
     }
 }
-.basket__product{
-    margin-top: 14vh;
+.basket{
     @include flexDirectionAlignJustify(column, center, center);
+    margin-top: 14vh;
+}
+.basket__product{
+    margin-bottom: 1rem;
+    box-shadow: $header-shadow;
+    overflow: hidden;
+    width: 97%;
     &__img{
-        display: block;
         width: 145px;
         height: 145px;
         object-fit: cover;
@@ -274,10 +279,7 @@ main{
     }  
     &__wrapper{
         display: flex;
-        margin-bottom: 1rem;
-        box-shadow: $header-shadow;
-        overflow: hidden;
-        width: 95%;
+        position: relative;
     }
     &__txtwrapper{
         @include flexDirectionAlignJustify(column, flex-start, space-between);
@@ -290,7 +292,20 @@ main{
         @include flexAlignJustify(center, center);
     }
     &__quantity{
-        width: 50px;
+        width: 20px;
+    }
+    &__times{
+        position: absolute;
+        color: $secondary-color-hex;
+        right: 0;
+        font-size: 1.2rem;
+        box-shadow: $header-shadow;
+        padding: 0.2rem;
+    }
+    &__price{
+        color: $secondary-color-hex;
+        align-self: flex-end;
+        @extend %price;
     }
 }
 .basket__empty{
@@ -302,6 +317,22 @@ main{
     width: 100%;
     color: $secondary-color-hex;
     
+}
+.total{
+    @include flexAlignJustify(center, space-between);
+    margin: $textmarginmobile;
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+    }
+    &__txt{
+        @extend %price;
+        color: $secondary-color-hex;
+    }
+}
+
+.confirm{
+    margin-top: 13vh;
 }
 
 .footer{
