@@ -1,10 +1,10 @@
-// Recuperer les données dans le localstorage en fonction de l'url
+// Récupérer les données dans le localstorage
 const displayData = () => {
-  let getLocalStorage = JSON.parse(localStorage.getItem("teddies"));
+  const getLocalStorage = JSON.parse(localStorage.getItem("teddies"));
   let i = 0;
   getLocalStorage.map((teddies) => {
     // Pour chaque ours
-    let teddiesPrice = teddies.price / 100;
+    const teddiesPrice = teddies.price / 100;
     i = i + 1;
     // Créer le HTML avec les données reçu
     let creationdivTeddies = `<li class=card>
@@ -21,9 +21,9 @@ const displayData = () => {
                                         </article>
                                     </a>   
                                 </li>`;
-    document.querySelector(".cardwrapper__grid").innerHTML += creationdivTeddies;
-    console.log(`Ourson numéro ${i} ajouté dans l'HTML`)                         
+    document.querySelector(
+      ".cardwrapper__grid"
+    ).innerHTML += creationdivTeddies; // Intégrer le code Html dans la page
+    console.log(`Ourson numéro ${i} ajouté dans l'HTML`);
   });
-}
-
-
+};
