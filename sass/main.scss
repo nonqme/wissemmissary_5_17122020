@@ -48,8 +48,7 @@ main{
             width: 60%;
             background-color: $header-background-color;
             transform: translateX(100%);
-            transition: $mobilemenu-transition;
-            
+            transition: $mobilemenu-transition;            
             &--effect{
                 transform:translateX(0%);
             }
@@ -73,10 +72,6 @@ main{
         &__link{
             @extend %title;
             color: $secondary-color-hex;
-        }
-        &__basketicon{
-            font-size: 1.3rem;
-            color: $primary-color-hex;
         }
     }
 }
@@ -118,10 +113,7 @@ main{
         right: 0;
         width: 65%;
         &--style{
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
-            margin: $textmarginmobile;
+            @extend %txtbubble;
         }
     }
     &__title{
@@ -192,6 +184,27 @@ main{
         @extend %price;
         flex-basis: 10%;
     }
+}
+.fetcherror{
+    position: relative;
+    &__img{
+        width: 100%;
+        height: 400px;
+        object-fit: cover;        
+    }
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+    }
+    &__txt{
+        @extend %para;
+    }
+    &__txtwrapper{
+        position: absolute;
+        top: 10%;
+        @extend %txtbubble;
+        text-align: center;
+    }    
 }
 
 .info{

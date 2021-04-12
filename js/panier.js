@@ -16,13 +16,13 @@ const productInBasket = () => {
     creationDivTeddies = `<article class="basket__product"> 
                                     <div class="basket__product__wrapper">
                                         <div class="basket__product__imgwrapper">
-                                        <img class="basket__product__img" src=${item.imageUrl}></img>
+                                        <img class="basket__product__img" src=${item.imageUrl} alt="${item.name} est une peluche fait à la main, il est tout doux"></img>
                                     </div>
                                     <div class="basket__product__txtwrapper">
-                                        <h1 class="basket__product__title">${item.name}</h1>
+                                        <h2 class="basket__product__title">${item.name}</h2>
                                         <p class="basket__product__colors basket__product--txt">Couleur : ${item.color}</p>
                                         <div class="basket__product__quantitywrapper">
-                                            <label for="product${item._id}" class="basket__product--txt">Quantité :</label>
+                                            <label for="${index}" class="basket__product--txt">Quantité :</label>
                                             <input min="1" max="99" class="basket__product__quantity basket__product--txt ${index}" id="${index}" type="number" name="product${index}" value="${item.quantity}">
                                         </div>
                                         <p class="basket__product__price">${item.price * item.quantity}€</p>
@@ -108,7 +108,7 @@ const createEmptyBasket = () => {
 
 // Création du formulaire
 const createForm = () => {
-  let createForm = `<h3 class="form__title></h3>
+  let createForm = `<h3 class="form__title">Pour finaliser la commande veuillez remplir le formulaire ci-dessous</h3>
                         <div class="form__name">
                             <label for="name">Nom</label>
                             <input type="text" name="name" id="name" placeholder="Nom..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
@@ -189,6 +189,7 @@ const order = async (userOrder) => {
     }
   } catch (error) {
     console.log(error);
+    window.alert("Une erreur est survenue, le serveur ne répond pas");
   }
 };
 

@@ -62,7 +62,7 @@ table {
     transform: translateX(0px);
   }
 }
-.total__title, .basket__empty, .basket__product__title, .product__title, .info__title, .card__title, .cta__title, .header__nav__link {
+.total__title, .basket__empty, .basket__product__title, .product__title, .info__title, .fetcherror__title, .card__title, .cta__title, .header__nav__link {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -70,7 +70,7 @@ table {
   margin: 0.5rem;
 }
 
-.basket__product--txt, .product__desc, .info__txt, .card__desc, .cta__txt {
+.basket__product--txt, .product__desc, .info__txt, .fetcherror__txt, .card__desc, .cta__txt {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   margin: 0.5rem;
@@ -115,6 +115,13 @@ table {
   outline-offset: 4px;
   outline-color: #1D72B3;
   font-family: "Roboto", sans-serif;
+}
+
+.fetcherror__txtwrapper, .cta__container--style {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+  margin: 0.5rem;
 }
 
 *:focus:focus {
@@ -196,10 +203,6 @@ main {
 .header__nav__link {
   color: #E78C02;
 }
-.header__nav__basketicon {
-  font-size: 1.3rem;
-  color: #1D72B3;
-}
 
 .burgericon {
   display: flex;
@@ -244,12 +247,6 @@ main {
   top: 0;
   right: 0;
   width: 65%;
-}
-.cta__container--style {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
-  margin: 0.5rem;
 }
 .cta__title {
   display: flex;
@@ -312,6 +309,23 @@ main {
   justify-content: flex-end;
   margin: 0.5rem;
   flex-basis: 10%;
+}
+
+.fetcherror {
+  position: relative;
+}
+.fetcherror__img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.fetcherror__title {
+  color: #1D72B3;
+}
+.fetcherror__txtwrapper {
+  position: absolute;
+  top: 10%;
+  text-align: center;
 }
 
 .info {

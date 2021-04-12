@@ -14,7 +14,7 @@ const createTeddyCard = () => {
   // Créer le HTML avec les données reçu
   let creationDivTeddies = `<article class=product>
                                 <div class="product__imgwrapper">
-                                    <img class="product__img" src=${item.teddy.imageUrl}></img>
+                                    <img class="product__img" src=${item.teddy.imageUrl} alt="${item.teddy.name} est une peluche fait à la main, il est tout doux"></img>
                                 </div>
                                 <h1 class="product__title">${item.teddy.name}</h1>
                                 <p class="product__desc">${item.teddy.description}</p>

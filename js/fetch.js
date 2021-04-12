@@ -15,9 +15,11 @@ const getTeddies = async () => {
       // Sinon renvoyé une erreur
       console.error("Retour du serveur : ", response.status);
       console.log("API non chargée");
+      displayFetchError(teddiesFetch);
     }
   } catch (error) {
     console.log(error);
+    displayFetchError();
   }
 };
 // Recuperer les données et les transferer dans le local storage
