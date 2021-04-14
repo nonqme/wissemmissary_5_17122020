@@ -148,7 +148,7 @@ main {
   position: fixed;
   top: 0;
   width: 100vw;
-  height: 12vh;
+  height: 8vh;
   background-color: white;
   box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
   z-index: 10;
@@ -157,7 +157,7 @@ main {
   margin: 0.5rem;
 }
 .header__logo {
-  width: 130px;
+  width: 100px;
 }
 .header__nav {
   display: flex;
@@ -232,11 +232,17 @@ main {
 .cta {
   position: relative;
   overflow: hidden;
-  margin-top: 12.5vh;
+  margin-top: 9vh;
 }
 .cta__img {
-  object-fit: cover;
-  object-position: -200px;
+  background-image: url("../image/teddy640.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
 }
 .cta__container {
   display: flex;
@@ -262,7 +268,8 @@ main {
 }
 
 .cardwrapper {
-  margin-top: 1rem;
+  max-width: 1440px;
+  margin: 1rem auto 0 auto;
 }
 .cardwrapper__grid {
   display: grid;
@@ -331,8 +338,9 @@ main {
 .info {
   display: grid;
   row-gap: 1rem;
-  margin: 13vh 1rem 1rem 1rem;
+  margin: 13vh auto 1rem auto;
   box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
+  max-width: 1440px;
 }
 .info__card {
   display: flex;
@@ -393,7 +401,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 14vh;
 }
 
 .basket__product {
@@ -477,6 +484,47 @@ main {
 .footer {
   background-color: #E78C02;
   height: 20rem;
+}
+
+@media all and (min-width: 768px) {
+  .cta__container {
+    height: 80%;
+    width: 50%;
+  }
+  .cta__img {
+    background-image: url("../image/teddy1280.jpg");
+  }
+
+  .cardwrapper {
+    margin-top: 1rem;
+  }
+  .cardwrapper__grid {
+    display: grid;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    grid-template-columns: repeat(2, auto);
+    margin: 0.5rem;
+  }
+
+  .card__desc {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    width: 90%;
+  }
+  .card__imgwrapper {
+    flex-basis: 90%;
+  }
+  .card__img {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media all and (min-width: 1024px) {
+  .cta__img {
+    background-image: url("../image/teddy1920.jpg");
+    height: 88vh;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

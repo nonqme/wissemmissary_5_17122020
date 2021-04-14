@@ -1,21 +1,22 @@
-const setTimeToTimer = (time) => {
+const setTimeToTimer = () => {
   // Stockage des variables utilisées plusieurs fois
   let data = {};
-  data.timer = time;
+  data.timer = 1; //timer en minutes 
   data.now = new Date().getTime();
   data.setupTime = localStorage.getItem("setupTime");
   return data;
 };
 
+
 const checkTimer = () => {
   // Vérifie le timer pour savoir si il doit fetch ou récuperer les données dans le localStorage
-  let data = setTimeToTimer(1);
+  let data = setTimeToTimer();
   data.setupTime == null ? getTeddies() : data.now - data.setupTime > data.timer * 60 * 1000 ? getTeddies() : displayData();
 };
 
 // Création du Timer
 const createTimer = () => {
-  let data = setTimeToTimer(1);
+  let data = setTimeToTimer();
   if (data.setupTime == null) {
     // Si pas de key "setuptime" la créer
     localStorage.setItem("setupTime", data.now);

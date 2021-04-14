@@ -85,9 +85,7 @@ const addToBasket = () => {
 // Créer un localstorage du produit selectionné
 
 const addItemBasket = () => {
-  let teddyQuantity = parseInt(
-    document.querySelector(".product__quantity__select").value
-  );
+  let teddyQuantity = parseInt(document.querySelector(".product__quantity__select").value);
   let teddyColor = document.querySelector(".product__colors__select").value;
   let basketItem = [];
   let newTeddy = true;
