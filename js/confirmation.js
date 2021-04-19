@@ -5,15 +5,15 @@ const displayConfirmation = () => {
   let prix = JSON.parse(localStorage.getItem("price"));
   //créer l'html des informations
   createConfirmation = `<h1 class="confirm__title">Merci d'avoir commandé sur Orinoco ${contact.firstName}!</h1> 
-                        <h2>Numéro de commande: ${id}</h2>
-                        <h3>Récapitulatif de commande</h3>
+                        <div class="confirm__commandnumber"><p class="confirm__commandnumber__title">Numéro de commande:</p><p class="confirm__commandnumber__txt">${id}</p></div>
+                        <p class="confirm__recap">Récapitulatif de commande</p>
                         <ul>
-                            <li>Nom: ${contact.lastName}</li>
-                            <li>Prénom: ${contact.firstName}</li>
-                            <li>Adresse: ${contact.address}</li>
-                            <li>Ville: ${contact.city}</li>
-                            <li>Email: ${contact.email}</li>
-                            <li>Prix: ${prix}</li>
+                            <li class="confirm__li"><p class="confirm__li__title">Nom:</p><p class="confirm__li__txt">${contact.lastName}</p></li>
+                            <li class="confirm__li"><p class="confirm__li__title">Prénom:</p><p class="confirm__li__txt">${contact.firstName}</p></li>
+                            <li class="confirm__li"><p class="confirm__li__title">Adresse:</p><p class="confirm__li__txt">${contact.address}</p></li>
+                            <li class="confirm__li"><p class="confirm__li__title">Ville:</p><p class="confirm__li__txt">${contact.city}</p></li>
+                            <li class="confirm__li"><p class="confirm__li__title">Email:</p><p class="confirm__li__txt">${contact.email}</p></li>
+                            <li class="confirm__li"><p class="confirm__li__title">Prix:</p><p class="confirm__li__txt">${prix}</p></li>
                         </ul>
                         `;
   document.querySelector(".confirm").innerHTML += createConfirmation; // ajouté l'html dans la page

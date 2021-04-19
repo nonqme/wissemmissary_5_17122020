@@ -33,7 +33,7 @@ const displayFetchError = () => {
   let createFetchError = `<div class="fetcherror">
                             <img class="fetcherror__img" src="image/chris-tellez-piUgqH1YsS0-unsplash.jpg" alt="Nounours fait un petit somme"></img>
                             <div class="fetcherror__txtwrapper">
-                              <h3 class="fetcherror__title">Les ours fonts une petite sieste</h3>
+                              <h3 class="fetcherror__title">Les ours font une petite sieste</h3>
                               <p class="fetcherror__txt">Veuillez réessayer plus tard</p>
                             </div>
                           </div>  

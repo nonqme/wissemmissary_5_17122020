@@ -43,8 +43,8 @@ main{
             @include flexDirectionAlignJustify(column, center, space-evenly);
             position: absolute;
             right: 0px;
-            top: 12vh;
-            height: 88vh;
+            top: 8.5vh;
+            height: 91.5vh;
             width: 60%;
             background-color: $header-background-color;
             transform: translateX(100%);
@@ -56,8 +56,8 @@ main{
         &__menueffect{
             position: absolute;
             left: 0px;
-            top: 12vh;
-            height: 88vh;
+            top: 8.5vh;
+            height: 100vh;
             width: 40%;
             background-color:rgba(29, 114, 179,0.7);
             transform: translateX(-100%);
@@ -101,7 +101,8 @@ main{
 .cta {
     position: relative;
     overflow: hidden;
-    margin-top: 9vh;
+    max-width: 1440px;
+    margin: 9vh auto 0 auto;
     &__img{
         background-image: url('../image/teddy640.jpg');
         background-repeat:no-repeat;
@@ -111,9 +112,6 @@ main{
         background-size:cover;
         background-position:center;
         height: 70vh;
-    }
-    &__imgwrapper{
-        
     }
     &__container{
         @include flexDirectionAlignJustify(column, center, center);
@@ -158,6 +156,7 @@ main{
     border-radius: 10px;
     &__flex{
         display: flex;
+        height: 100%;
     }
     &__img{
         display: block;
@@ -197,10 +196,12 @@ main{
 }
 .fetcherror{
     position: relative;
+    @include flexAlignJustify(center, center);
     &__img{
         width: 100%;
-        height: 400px;
-        object-fit: cover;        
+        height: 500px;
+        object-fit: cover;
+        border-radius: 10px;         
     }
     &__title{
         @extend %title;
@@ -220,7 +221,7 @@ main{
 .info{
     display: grid;
     row-gap: 1rem;
-    margin:13vh auto 1rem auto; 
+    margin:1rem 1rem 1rem 1rem; 
     box-shadow: $header-shadow;
     max-width: 1440px;
     &__card{
@@ -245,14 +246,13 @@ main{
 
 .product{
     @include flexDirectionAlignJustify(column, center, center);
-    margin-top: 13vh;
+    margin-top: 9vh;
     &__imgwrapper{
         margin-bottom: 1rem;
     }
     &__img{
         object-fit: cover;
         height: 300px;
-        width: 100%;
     }
     &__title{
         @extend %title;
@@ -281,6 +281,8 @@ main{
 }
 .basket{
     @include flexDirectionAlignJustify(column, center, center);
+    margin: 9vh auto 0 auto;
+    max-width: 1000px;
 }
 .basket__product{
     margin-bottom: 1rem;
@@ -314,9 +316,6 @@ main{
     &__quantitywrapper{
         @include flexAlignJustify(center, center);
     }
-    &__quantity{
-        width: 20px;
-    }
     &__times{
         position: absolute;
         color: $secondary-color-hex;
@@ -335,8 +334,7 @@ main{
     @include flexAlignJustify(center, center);
     @extend %title;
     margin: 0;
-    margin-top: 14vh;
-    height: 80vh;
+    height: 90vh;
     width: 100%;
     color: $secondary-color-hex;
     
@@ -344,6 +342,7 @@ main{
 .total{
     @include flexAlignJustify(center, space-between);
     margin: $textmarginmobile;
+    max-width: 1440px;
     &__title{
         @extend %title;
         color: $primary-color-hex;
@@ -355,19 +354,84 @@ main{
 }
 
 .confirm{
-    margin-top: 13vh;
+    max-width: 1440px;
+    margin: 15vh auto 0 auto;
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+        text-align: center
+    }
+    &__commandnumber{
+        @include flexAlignJustify(center, center);
+        border-bottom: 1px solid black;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        &__title{
+            @extend %para;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        &__txt{
+            @extend %para;
+            font-size: 1rem;
+        }
+    }
+    &__recap{
+        @extend %title;
+        color: $primary-color-hex;
+        text-align: center;
+    }
+    &__li{
+        @include flexAlignJustify(center, space-between);
+        border-bottom: 1px solid black;
+        &__title{
+            @extend %para;
+            font-weight: bold;
+        }
+        &__txt{
+            @extend %para;
+            color: $secondary-color-hex;
+        }
+    }
 }
+.form{
+    @include flexDirectionAlignJustify(column, center, center);
+    max-width: 1440px;
+    margin: 1rem;
+    padding: 1rem;
+    border-top: 1px solid;
+    &__title{
+        @extend %title;
+        color: $primary-color-hex;
+    }
+    &--style{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        @extend %para;
+        color: $secondary-color-hex;
+    }
+    &__btn{
+        @extend %btn;
+        margin: 2rem;
+        border: none;
+    }
+}
+
 
 .footer{
     background-color: $secondary-color-hex;
     height: 20rem;
 }
+
+@media all and (min-width: 380px) {
+    .basket__product__title{
+        width: auto;
+    }
+}
+
 @media all and (min-width: 768px) {
     .cta{
-        &__container{
-            height: 80%;
-            width: 50%;
-        }
         &__img{
             background-image: url('../image/teddy1280.jpg');
         }     
@@ -398,13 +462,77 @@ main{
             height: 100%;
         }
     }
+    .fetcherror{
+        &__img{
+            width: 50%;
+        }
+    }
+    .confirm__li{
+        width: 50%;
+        margin: auto;
+    }
  }
 
  @media all and (min-width: 1024px) {
+    .header__nav{
+        flex-basis: 40%;
+        &__ul{
+            flex-direction: row;
+            position: relative;
+            height: auto;
+            width: 100%;
+            right: auto;
+            top: auto;
+            transform: translateX(0);
+            transition: none;            
+        }
+        &__list{
+            opacity: 100;
+        }
+        &__link{
+            color: black;
+            font-style: normal;
+            font-weight: 400;
+        }
+    }
+    .header__nav__burger{
+        display: none;
+    }
     .cta{
         &__img{
             background-image: url('../image/teddy1920.jpg');
             height: 88vh;
+        }
+    }
+ }
+ @media all and (min-width: 1440px) {
+    .info{
+        margin: 1rem auto 1rem auto;
+    }
+    .cardwrapper{
+        &__grid{
+            display: grid;
+            row-gap: 1rem;
+            column-gap: 1rem;
+            grid-template-columns: repeat(3, auto);
+            margin: $textmarginmobile;
+        }
+    }
+    .cta{
+        &__container{
+            top:30%;
+            &--style{
+                width: 70%;
+            }
+        }
+    }
+    .total{
+        margin: auto;
+    }
+    .form{
+        margin: auto;
+        &--style{
+            width: 30%;
         }
     }
  }

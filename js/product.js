@@ -1,24 +1,24 @@
 const getTeddyData = () => {
   // Stockage des variables utilisées plusieurs fois
-  let item = {};
-  item.params = new URLSearchParams(document.location.search);
-  item.id = item.params.get("id");
-  item.teddy = JSON.parse(localStorage.getItem(item.id));
-  item.teddyPrice = item.teddy.price / 100;
-  return item;
+  let data = {};
+  data.params = new URLSearchParams(document.location.search);
+  data.id = data.params.get("id");
+  data.teddy = JSON.parse(localStorage.getItem(data.id));
+  data.teddyPrice = data.teddy.price / 100;
+  return data;
 };
 
 // Recuperer les données dans le localstorage en fonction de l'url
 const createTeddyCard = () => {
-  let item = getTeddyData();
+  let data = getTeddyData();
   // Créer le HTML avec les données reçu
   let creationDivTeddies = `<article class=product>
                                 <div class="product__imgwrapper">
-                                    <img class="product__img" src=${item.teddy.imageUrl} alt="${item.teddy.name} est une peluche fait à la main, il est tout doux"></img>
+                                    <img class="product__img" src=${data.teddy.imageUrl} alt="${data.teddy.name} est une peluche fait à la main, il est tout doux"></img>
                                 </div>
-                                <h1 class="product__title">${item.teddy.name}</h1>
-                                <p class="product__desc">${item.teddy.description}</p>
-                                <p class="product__price">${item.teddyPrice}€</p>
+                                <h1 class="product__title">${data.teddy.name}</h1>
+                                <p class="product__desc">${data.teddy.description}</p>
+                                <p class="product__price">${data.teddyPrice}€</p>
                                 <div class="product__container">
                                     <div class="product__colors">
                                         <select class="product__colors__select product__list--style">
@@ -47,8 +47,8 @@ const createTeddyCard = () => {
 
 // Créer la list des couleurs
 const createColorList = () => {
-  let item = getTeddyData();
-  let getColors = item.teddy.colors;
+  let data = getTeddyData();
+  let getColors = data.teddy.colors;
   getColors.map((getColors) => {
     let creationDivColors = `<option value=${getColors}>${getColors}</option>`;
     document.querySelector(".product__colors__select").innerHTML += creationDivColors; // Ajout des la list des couleurs dans le HTML
@@ -77,48 +77,48 @@ const addToBasket = () => {
     } else if (quantityValue !== "quantityNone" && colorValue !== "colorNone") {
       // sinon si tout est ok lancé la fonction nécessaire
       window.alert("Produit ajouté au panier");
-      addItemBasket();
+      addProductToLocalStorage();
     }
   });
 };
 
 // Créer un localstorage du produit selectionné
 
-const addItemBasket = () => {
+const addProductToLocalStorage = () => {
   let teddyQuantity = parseInt(document.querySelector(".product__quantity__select").value);
   let teddyColor = document.querySelector(".product__colors__select").value;
-  let basketItem = [];
+  let basket = [];
   let newTeddy = true;
-  let item = getTeddyData();
+  let data = getTeddyData();
 
   // stockage dans un array
   let basketArray = {
-    _id: item.teddy._id,
-    imageUrl: item.teddy.imageUrl,
-    name: item.teddy.name,
-    price: item.teddyPrice,
+    _id: data.teddy._id,
+    imageUrl: data.teddy.imageUrl,
+    name: data.teddy.name,
+    price: data.teddyPrice,
     quantity: teddyQuantity,
     color: teddyColor,
   };
 
-  // Si le localstorage est vide créer un nouveau array basketItem et le push dans le localStorage
-  if (localStorage.getItem("basketItem") === null) {
-    basketItem.push(basketArray);
-    localStorage.setItem("basketItem", JSON.stringify(basketItem));
-    console.log(basketItem);
+  // Si le localstorage est vide créer un nouveau array basket et le push dans le localStorage
+  if (localStorage.getItem("basket") === null) {
+    basket.push(basketArray);
+    localStorage.setItem("basket", JSON.stringify(basket));
+    console.log(basket);
   }
   // Sinon recupérer le tableau du localStorage, ajouter le nouveau produit, et enregistrer le nouvelle array
   else {
-    let basketItem = JSON.parse(localStorage.getItem("basketItem"));
-    basketItem.forEach((product) => {
-      if (teddyColor === product.color && item.teddy._id === product._id) {
+    let basket = JSON.parse(localStorage.getItem("basket"));
+    basket.forEach((product) => {
+      if (teddyColor === product.color && data.teddy._id === product._id) {
         //si un produit avec la même id et la même couleur est présent
         product.quantity += teddyQuantity; // modifié la quantité du produit dans le localstorage
         newTeddy = false; // ce n'est pas un nouvelle ours
       }
     });
-    if (newTeddy) basketItem.push(basketArray); // si c'est un nouvelle ours
-    localStorage.setItem("basketItem", JSON.stringify(basketItem)); // ajouté au localstorage
+    if (newTeddy) basket.push(basketArray); // si c'est un nouvelle ours
+    localStorage.setItem("basket", JSON.stringify(basket)); // ajouté au localstorage
   }
 };
 

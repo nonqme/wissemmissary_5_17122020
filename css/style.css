@@ -62,7 +62,7 @@ table {
     transform: translateX(0px);
   }
 }
-.total__title, .basket__empty, .basket__product__title, .product__title, .info__title, .fetcherror__title, .card__title, .cta__title, .header__nav__link {
+.form__title, .confirm__recap, .confirm__title, .total__title, .basket__empty, .basket__product__title, .product__title, .info__title, .fetcherror__title, .card__title, .cta__title, .header__nav__link {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-style: italic;
@@ -70,7 +70,7 @@ table {
   margin: 0.5rem;
 }
 
-.basket__product--txt, .product__desc, .info__txt, .fetcherror__txt, .card__desc, .cta__txt {
+.form--style, .confirm__li__txt, .confirm__li__title, .confirm__commandnumber__txt, .confirm__commandnumber__title, .basket__product--txt, .product__desc, .info__txt, .fetcherror__txt, .card__desc, .cta__txt {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   margin: 0.5rem;
@@ -93,7 +93,7 @@ table {
   text-overflow: ellipsis;
 }
 
-.btn--style {
+.form__btn, .btn--style {
   background-color: #E78C02;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
   border-radius: 12px;
@@ -174,8 +174,8 @@ main {
   justify-content: space-evenly;
   position: absolute;
   right: 0px;
-  top: 12vh;
-  height: 88vh;
+  top: 8.5vh;
+  height: 91.5vh;
   width: 60%;
   background-color: white;
   transform: translateX(100%);
@@ -187,8 +187,8 @@ main {
 .header__nav__menueffect {
   position: absolute;
   left: 0px;
-  top: 12vh;
-  height: 88vh;
+  top: 8.5vh;
+  height: 100vh;
   width: 40%;
   background-color: rgba(29, 114, 179, 0.7);
   transform: translateX(-100%);
@@ -232,7 +232,8 @@ main {
 .cta {
   position: relative;
   overflow: hidden;
-  margin-top: 9vh;
+  max-width: 1440px;
+  margin: 9vh auto 0 auto;
 }
 .cta__img {
   background-image: url("../image/teddy640.jpg");
@@ -283,6 +284,7 @@ main {
 }
 .card__flex {
   display: flex;
+  height: 100%;
 }
 .card__img {
   display: block;
@@ -320,11 +322,15 @@ main {
 
 .fetcherror {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fetcherror__img {
   width: 100%;
-  height: 400px;
+  height: 500px;
   object-fit: cover;
+  border-radius: 10px;
 }
 .fetcherror__title {
   color: #1D72B3;
@@ -338,7 +344,7 @@ main {
 .info {
   display: grid;
   row-gap: 1rem;
-  margin: 13vh auto 1rem auto;
+  margin: 1rem 1rem 1rem 1rem;
   box-shadow: rgba(231, 140, 2, 0.6) 0px 0px 0px 2px, rgba(231, 140, 2, 0.8) 0px 0px 6px -1px;
   max-width: 1440px;
 }
@@ -365,7 +371,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 13vh;
+  margin-top: 9vh;
 }
 .product__imgwrapper {
   margin-bottom: 1rem;
@@ -373,7 +379,6 @@ main {
 .product__img {
   object-fit: cover;
   height: 300px;
-  width: 100%;
 }
 .product__title {
   color: #1D72B3;
@@ -401,6 +406,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 9vh auto 0 auto;
+  max-width: 1000px;
 }
 
 .basket__product {
@@ -437,9 +444,6 @@ main {
   align-items: center;
   justify-content: center;
 }
-.basket__product__quantity {
-  width: 20px;
-}
 .basket__product__times {
   position: absolute;
   color: #E78C02;
@@ -458,8 +462,7 @@ main {
   align-items: center;
   justify-content: center;
   margin: 0;
-  margin-top: 14vh;
-  height: 80vh;
+  height: 90vh;
   width: 100%;
   color: #E78C02;
 }
@@ -469,6 +472,7 @@ main {
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem;
+  max-width: 1440px;
 }
 .total__title {
   color: #1D72B3;
@@ -478,7 +482,67 @@ main {
 }
 
 .confirm {
-  margin-top: 13vh;
+  max-width: 1440px;
+  margin: 15vh auto 0 auto;
+}
+.confirm__title {
+  color: #1D72B3;
+  text-align: center;
+}
+.confirm__commandnumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+.confirm__commandnumber__title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+.confirm__commandnumber__txt {
+  font-size: 1rem;
+}
+.confirm__recap {
+  color: #1D72B3;
+  text-align: center;
+}
+.confirm__li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+.confirm__li__title {
+  font-weight: bold;
+}
+.confirm__li__txt {
+  color: #E78C02;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1440px;
+  margin: 1rem;
+  padding: 1rem;
+  border-top: 1px solid;
+}
+.form__title {
+  color: #1D72B3;
+}
+.form--style {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #E78C02;
+}
+.form__btn {
+  margin: 2rem;
+  border: none;
 }
 
 .footer {
@@ -486,11 +550,12 @@ main {
   height: 20rem;
 }
 
-@media all and (min-width: 768px) {
-  .cta__container {
-    height: 80%;
-    width: 50%;
+@media all and (min-width: 380px) {
+  .basket__product__title {
+    width: auto;
   }
+}
+@media all and (min-width: 768px) {
   .cta__img {
     background-image: url("../image/teddy1280.jpg");
   }
@@ -519,11 +584,77 @@ main {
     width: 100%;
     height: 100%;
   }
+
+  .fetcherror__img {
+    width: 50%;
+  }
+
+  .confirm__li {
+    width: 50%;
+    margin: auto;
+  }
 }
 @media all and (min-width: 1024px) {
+  .header__nav {
+    flex-basis: 40%;
+  }
+  .header__nav__ul {
+    flex-direction: row;
+    position: relative;
+    height: auto;
+    width: 100%;
+    right: auto;
+    top: auto;
+    transform: translateX(0);
+    transition: none;
+  }
+  .header__nav__list {
+    opacity: 100;
+  }
+  .header__nav__link {
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .header__nav__burger {
+    display: none;
+  }
+
   .cta__img {
     background-image: url("../image/teddy1920.jpg");
     height: 88vh;
+  }
+}
+@media all and (min-width: 1440px) {
+  .info {
+    margin: 1rem auto 1rem auto;
+  }
+
+  .cardwrapper__grid {
+    display: grid;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    grid-template-columns: repeat(3, auto);
+    margin: 0.5rem;
+  }
+
+  .cta__container {
+    top: 30%;
+  }
+  .cta__container--style {
+    width: 70%;
+  }
+
+  .total {
+    margin: auto;
+  }
+
+  .form {
+    margin: auto;
+  }
+  .form--style {
+    width: 30%;
   }
 }
 

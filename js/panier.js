@@ -1,31 +1,31 @@
 // Récuperer les données dans le localStorage
 const getBasket = () => {
-  let basket = JSON.parse(localStorage.getItem("basketItem"));
-  basket === null ? createEmptyBasket() : (productInBasket(), waitContentLoaded()); // Si il n'y a pas de donnée affiché panier vide sinon afficher les produit dans le panier
+  let basket = JSON.parse(localStorage.getItem("basket"));
+  basket === null ? displayEmptyBasket() : displayBasket(); // Si il n'y a pas de donnée affiché panier vide sinon afficher les produit dans le panier
 };
 
 //Affichage des produits dans le panier
-const productInBasket = () => {
-  let basket = JSON.parse(localStorage.getItem("basketItem"));
+const displayBasket = () => {
+  let basket = JSON.parse(localStorage.getItem("basket"));
   let totalPrice = 0;
   let creationDivTeddies = "";
-  basket.map((item, index) => {
+  basket.map((product, index) => {
     //Pour chaque item dans le panier
-    totalPrice = totalPrice + item.price * item.quantity;
+    totalPrice = totalPrice + product.price * product.quantity;
     //Créer le html
     creationDivTeddies = `<article class="basket__product"> 
                                     <div class="basket__product__wrapper">
                                         <div class="basket__product__imgwrapper">
-                                        <img class="basket__product__img" src=${item.imageUrl} alt="${item.name} est une peluche fait à la main, il est tout doux"></img>
+                                        <img class="basket__product__img" src=${product.imageUrl} alt="${product.name} est une peluche fait à la main, il est tout doux"></img>
                                     </div>
                                     <div class="basket__product__txtwrapper">
-                                        <h2 class="basket__product__title">${item.name}</h2>
-                                        <p class="basket__product__colors basket__product--txt">Couleur : ${item.color}</p>
+                                        <h2 class="basket__product__title">${product.name}</h2>
+                                        <p class="basket__product__colors basket__product--txt">Couleur : ${product.color}</p>
                                         <div class="basket__product__quantitywrapper">
                                             <label for="${index}" class="basket__product--txt">Quantité :</label>
-                                            <input min="1" max="99" class="basket__product__quantity basket__product--txt ${index}" id="${index}" type="number" name="product${index}" value="${item.quantity}">
+                                            <input min="1" max="99" class="basket__product__quantity basket__product--txt ${index}" id="${index}" type="number" name="product${index}" value="${product.quantity}">
                                         </div>
-                                        <p class="basket__product__price">${item.price * item.quantity}€</p>
+                                        <p class="basket__product__price">${product.price * product.quantity}€</p>
                                     </div>
                                     <i class="fas fa-times basket__product__times" id="times${index}"></i>    
                                 </article>                        
@@ -34,14 +34,16 @@ const productInBasket = () => {
   });
   localStorage.setItem("price", JSON.stringify(totalPrice)); // Création de la clé Prix dans le localstorage
   updateValueLocalStorage();
-  deleteItem();
+  deleteProduct();
   displayTotal(totalPrice);
+  displayForm();
+  formEvent();
 };
 
 // Mettre à jours la quantité dans le localstorage
 const updateValueLocalStorage = () => {
   const input = document.querySelectorAll(".basket__product__quantity");
-  let basket = JSON.parse(localStorage.getItem("basketItem"));
+  let basket = JSON.parse(localStorage.getItem("basket"));
   input.forEach((item) => {
     //Pour chaque article
     item.addEventListener("change", (e) => {
@@ -51,7 +53,7 @@ const updateValueLocalStorage = () => {
       console.log(getInputId.value);
       if (getInputId.value >= 1 && getInputId.value <99) {
         basket[index].quantity = getInputId.value;
-        localStorage.setItem("basketItem", JSON.stringify(basket)); //Et mettre à jours le localstorage
+        localStorage.setItem("basket", JSON.stringify(basket)); //Et mettre à jours le localstorage
       }
       updateHTML();
     });
@@ -59,9 +61,9 @@ const updateValueLocalStorage = () => {
 };
 
 //Suprimmer les éléments séléctionnés
-const deleteItem = () => {
+const deleteProduct = () => {
   const times = document.querySelectorAll(".basket__product__times");
-  let basket = JSON.parse(localStorage.getItem("basketItem"));
+  let basket = JSON.parse(localStorage.getItem("basket"));
   times.forEach((item) => {
     // Pour chaque icone de croix
     item.addEventListener("click", (e) => {
@@ -73,9 +75,9 @@ const deleteItem = () => {
       basket.splice(index, 1);
       console.log(typeof basket)
       if (basket.length === 0){
-          localStorage.removeItem("basketItem")
+          localStorage.removeItem("basket")
       } else {
-        localStorage.setItem("basketItem", JSON.stringify(basket)); 
+        localStorage.setItem("basket", JSON.stringify(basket)); 
       }
       updateHTML();
     });
@@ -93,11 +95,13 @@ const displayTotal = (totalPrice) => {
 //Mettre a jours le html
 const updateHTML = () => {
   document.querySelector(".basket").innerHTML = "";
+  document.querySelector(".total").innerHTML = "";
+  document.querySelector(".form").innerHTML = "";
   getBasket();
 };
 
 // Affichage du panier vide
-const createEmptyBasket = () => {
+const displayEmptyBasket = () => {
   displayTeddies = "<h1 class=basket__empty>Panier Vide</h1>";
   console.log("code HTML crée");
 
@@ -107,25 +111,25 @@ const createEmptyBasket = () => {
 };
 
 // Création du formulaire
-const createForm = () => {
+const displayForm = () => {
   let createForm = `<h3 class="form__title">Pour finaliser la commande veuillez remplir le formulaire ci-dessous</h3>
-                        <div class="form__name">
+                        <div class="form__name form--style">
                             <label for="name">Nom</label>
                             <input type="text" name="name" id="name" placeholder="Nom..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
                         </div>
-                        <div class="form__firstname">
+                        <div class="form__firstname form--style">
                             <label for="firstname">Prénom</label>
                             <input type="text" name="firstname" id="firstname" placeholder="Prénom..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
                         </div>
-                        <div class="form__address">
+                        <div class="form__address form--style">
                             <label for="address">Adresse</label>
                             <input type="text" name="adress" id="address" placeholder="Adresse..." pattern="^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9\-]+$" required />
                         </div>
-                        <div class="form__city">
+                        <div class="form__city form--style">
                             <label for="city">Ville</label>
                             <input type="text" name="city" id="city" placeholder="Ville..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
                         </div>
-                        <div class="form__email">
+                        <div class="form__email form--style">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="email" placeholder="Email..." required />
                         </div>
@@ -151,7 +155,7 @@ const formEvent = () => {
     };
 
     let products = [];
-    let basket = JSON.parse(localStorage.getItem("basketItem"));
+    let basket = JSON.parse(localStorage.getItem("basket"));
     basket.map((data) => {
       //Pour chaque objet dans le panier récuperer les Ids
       products.push(data._id);
@@ -197,15 +201,8 @@ const order = async (userOrder) => {
 const orderResponse = (orderFetch) => {
   localStorage.setItem("contact", JSON.stringify(orderFetch.contact));
   localStorage.setItem("orderId", JSON.stringify(orderFetch.orderId));
-  localStorage.removeItem("basketItem");
+  localStorage.removeItem("basket");
   window.location.replace("confirmation.html");
-};
-// Attendre que le document est chargé avant d'executer les fonctions du formulaire
-const waitContentLoaded = () => {
-  document.addEventListener("DOMContentLoaded", () => {
-    createForm();
-    formEvent();
-  });
 };
 
 getBasket();
