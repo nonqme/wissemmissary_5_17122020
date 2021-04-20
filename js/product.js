@@ -78,6 +78,7 @@ const addToBasket = () => {
       // sinon si tout est ok lancé la fonction nécessaire
       window.alert("Produit ajouté au panier");
       addProductToLocalStorage();
+      displayNumberOfProduct();
     }
   });
 };

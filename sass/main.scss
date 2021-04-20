@@ -76,9 +76,33 @@ main{
     }
 }
 
+.carticon{
+    cursor: pointer;
+    position: relative;
+    margin-right: 2rem;
+    &__icon{
+        color: $primary-color-hex;
+        font-size: 1.3rem;
+    }
+    &__number{
+        position:absolute;
+        bottom:-4px;
+        right: -9px;
+        background-color: $secondary-color-hex;
+        color: white;
+        border-radius: 4px;
+        padding: 0 4px;
+        text-align: center;
+        font-family: $title-font;
+        font-size: 0.9rem;
+
+    }
+}
+
 .burgericon{
     @include flexDirectionAlignJustify(column, center, center);
     cursor: pointer;
+    margin-right: 2rem;
     &__line{
         width: 20px;
         height: 4px;

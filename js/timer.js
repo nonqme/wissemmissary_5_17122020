@@ -26,6 +26,7 @@ const createTimer = () => {
     localStorage.clear();
     localStorage.setItem("setupTime", data.now);
     console.log("Supression des données et création du setupTime");
+    displayNumberOfProduct();
   }
 };
 
