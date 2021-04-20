@@ -115,11 +115,11 @@ const displayForm = () => {
   let createForm = `<h3 class="form__title">Pour finaliser la commande veuillez remplir le formulaire ci-dessous</h3>
                         <div class="form__name form--style">
                             <label for="name">Nom</label>
-                            <input type="text" name="name" id="name" placeholder="Nom..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
+                            <input type="text" name="name" id="name" placeholder="Nom..." pattern="^[A-Za-zÀ-ÿ\s-]+$" required />
                         </div>
                         <div class="form__firstname form--style">
                             <label for="firstname">Prénom</label>
-                            <input type="text" name="firstname" id="firstname" placeholder="Prénom..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
+                            <input type="text" name="firstname" id="firstname" placeholder="Prénom..." pattern="^[A-Za-zÀ-ÿ\s-]+$" required />
                         </div>
                         <div class="form__address form--style">
                             <label for="address">Adresse</label>
@@ -127,7 +127,7 @@ const displayForm = () => {
                         </div>
                         <div class="form__city form--style">
                             <label for="city">Ville</label>
-                            <input type="text" name="city" id="city" placeholder="Ville..." pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" required />
+                            <input type="text" name="city" id="city" placeholder="Ville..." pattern="^[A-Za-zÀ-ÿ\s-]+$" required />
                         </div>
                         <div class="form__email form--style">
                             <label for="email">Email</label>
@@ -140,33 +140,45 @@ const displayForm = () => {
 
 // Event listerner sur le bouton du formulaire
 const formEvent = () => {
-  let formBtn = document.querySelector(".form__btn");
+  const formBtn = document.querySelector(".form__btn");
+  const nameForm = document.getElementById("name");
+  const firstnameForm = document.getElementById("firstname");
+  const addressForm = document.getElementById("address");
+  const cityForm = document.getElementById("city");
+  const emailForm = document.getElementById("email");
   formBtn.addEventListener("click", (e) => {
-    //si l'utilisateur clic sur el bouton
-    e.preventDefault();
-    console.log("test");
-    let contact = {
-      // Récuperer les informations fournis
-      firstName: document.getElementById("firstname").value,
-      lastName: document.getElementById("name").value,
-      address: document.getElementById("address").value,
-      city: document.getElementById("city").value,
-      email: document.getElementById("email").value,
-    };
-
-    let products = [];
-    let basket = JSON.parse(localStorage.getItem("basket"));
-    basket.map((data) => {
-      //Pour chaque objet dans le panier récuperer les Ids
-      products.push(data._id);
-      console.log(data._id);
-    });
-    let userOrder = { contact, products }; // créer un array avec les données récuperer
-    console.log(contact);
-    console.log(userOrder);
-    order(userOrder);
+    //si l'utilisateur clic sur le bouton
+    if ((nameForm.validity.patternMismatch === false) && (firstnameForm.validity.patternMismatch === false) && (addressForm.validity.patternMismatch === false) && (cityForm.validity.patternMismatch === false) && (emailForm.validity.patternMismatch === false)){
+      console.log("all good");
+      formValueToLocalStorage();
+    } else {
+      console.log("mismatch")
+    }
   });
 };
+
+const formValueToLocalStorage = () => {
+  let contact = {
+    // Récuperer les informations fournis
+    firstName: document.getElementById("firstname").value,
+    lastName: document.getElementById("name").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value,
+    email: document.getElementById("email").value,
+  };
+
+  let products = [];
+  let basket = JSON.parse(localStorage.getItem("basket"));
+  basket.map((data) => {
+    //Pour chaque objet dans le panier récuperer les Ids
+    products.push(data._id);
+    console.log(data._id);
+  });
+  let userOrder = { contact, products }; // créer un array avec les données récuperer
+  console.log(contact);
+  console.log(userOrder);
+  order(userOrder);
+}
 
 // Envoye des données pour récuperer l'id de la commande
 const order = async (userOrder) => {

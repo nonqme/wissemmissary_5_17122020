@@ -7,7 +7,7 @@ const getTeddies = async () => {
       // Si la réponse est ok executer les fonctions nécessaire
       const teddiesFetch = await response.json();
       createTimer(teddiesFetch);
-      storeAPI(teddiesFetch);
+      apiStorage(teddiesFetch);
       idStorage(teddiesFetch);
       displayData(teddiesFetch);
       console.log("API chargée");
@@ -23,7 +23,7 @@ const getTeddies = async () => {
 };
 // Recuperer les données et les transferer dans le local storage
 
-const storeAPI = (teddiesData) => {
+const apiStorage = (teddiesData) => {
   localStorage.setItem("teddies", JSON.stringify(teddiesData));
   console.log("API chargée dans le localstorage");
 };
