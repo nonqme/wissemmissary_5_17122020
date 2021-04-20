@@ -148,7 +148,7 @@ const formEvent = () => {
   const emailForm = document.getElementById("email");
   formBtn.addEventListener("click", (e) => {
     //si l'utilisateur clic sur le bouton
-    if ((nameForm.validity.patternMismatch === false) && (firstnameForm.validity.patternMismatch === false) && (addressForm.validity.patternMismatch === false) && (cityForm.validity.patternMismatch === false) && (emailForm.validity.patternMismatch === false)){
+    if ((nameForm.validity.patternMismatch === false) && (firstnameForm.validity.patternMismatch === false) && (addressForm.validity.patternMismatch === false) && (cityForm.validity.patternMismatch === false) && (emailForm.validity.valid === true)){
       console.log("all good");
       formValueToLocalStorage();
     } else {
